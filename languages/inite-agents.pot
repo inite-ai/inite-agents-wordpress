@@ -2,14 +2,14 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: INITE Agents 0.3.0\n"
+"Project-Id-Version: INITE Agents 0.4.0\n"
 "Report-Msgid-Bugs-To: https://inite.ai/en/contact\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-22T17:55:42+00:00\n"
+"POT-Creation-Date: 2026-10-22T20:44:00+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: inite-agents\n"
@@ -98,115 +98,127 @@ msgstr ""
 msgid "Unknown ability."
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:42
+#: includes/class-inite-agents-admin-status.php:47
 msgid "WordPress is installed in a subdirectory, so it never sees requests to the domain root. Upload the files to the root instead, or ask INITE for the agents subdomain."
 msgstr ""
 
 #. translators: 1: path, 2: who serves it.
-#: includes/class-inite-agents-admin-status.php:51
+#: includes/class-inite-agents-admin-status.php:56
 #, php-format
 msgid "%1$s is left alone: %2$s already answers it."
 msgstr ""
 
 #. translators: %s: path.
-#: includes/class-inite-agents-admin-status.php:54
+#: includes/class-inite-agents-admin-status.php:59
 #, php-format
 msgid "%s: nothing stored yet."
 msgstr ""
 
 #. translators: %s: path linked to the live file.
-#: includes/class-inite-agents-admin-status.php:57
+#: includes/class-inite-agents-admin-status.php:62
 #, php-format
 msgid "%s is served."
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:71
+#: includes/class-inite-agents-admin-status.php:76
 msgid "No Content-Signal line stored yet."
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:74
+#: includes/class-inite-agents-admin-status.php:79
 msgid "A robots.txt file exists on the server, so WordPress does not generate one and this plugin cannot add to it. Paste this line under \"User-agent: *\" in that file:"
 msgstr ""
 
 #. translators: %s: the robots.txt line.
-#: includes/class-inite-agents-admin-status.php:80
+#: includes/class-inite-agents-admin-status.php:85
 #, php-format
 msgid "Adds %s to the \"User-agent: *\" group."
 msgstr ""
 
 #. translators: %s: SEO plugin name.
-#: includes/class-inite-agents-admin-status.php:93
+#: includes/class-inite-agents-admin-status.php:98
 #, php-format
 msgid "The Organization schema is left out of the JSON-LD: %s already prints one."
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:95
+#: includes/class-inite-agents-admin-status.php:100
 msgid "The JSON-LD goes on the front page only. FAQPage is left out of a page that has an SEO plugin's FAQ block."
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:106
+#: includes/class-inite-agents-admin-status.php:111
 msgid "Needs WordPress 6.9 or later, which has the Abilities API."
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:109
+#: includes/class-inite-agents-admin-status.php:114
 msgid "Install and activate the MCP Adapter plugin so agents can reach them over MCP."
 msgstr ""
 
 #. translators: %s: MCP endpoint URL.
-#: includes/class-inite-agents-admin-status.php:112
+#: includes/class-inite-agents-admin-status.php:117
 #, php-format
 msgid "The MCP Adapter lists them on its default server: %s"
 msgstr ""
 
+#: includes/class-inite-agents-admin-status.php:127
+msgid "Off: nothing is sent, and agent reads are not counted."
+msgstr ""
+
 #. translators: %d: number of reads.
-#: includes/class-inite-agents-admin-status.php:126
+#: includes/class-inite-agents-admin-status.php:134
 #, php-format
 msgid "AI agents read the served paths %d time in the last 7 days."
 msgid_plural "AI agents read the served paths %d times in the last 7 days."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-inite-agents-admin-status.php:139
-msgid "Last check"
-msgstr ""
-
-#: includes/class-inite-agents-admin-status.php:139
-msgid "OK"
-msgstr ""
-
 #: includes/class-inite-agents-admin-status.php:144
-msgid "Site"
-msgstr ""
-
-#: includes/class-inite-agents-admin-status.php:145
-msgid "Facts version"
-msgstr ""
-
-#: includes/class-inite-agents-admin-status.php:145
-msgid "confirmed"
+msgid "Off: no post is made. The articles you approve wait in your INITE cabinet."
 msgstr ""
 
 #: includes/class-inite-agents-admin-status.php:146
+msgid "The articles you approve in the INITE cabinet become posts at the next hourly sync, as \"New articles\" below says."
+msgstr ""
+
+#: includes/class-inite-agents-admin-status.php:159
+msgid "Last check"
+msgstr ""
+
+#: includes/class-inite-agents-admin-status.php:159
+msgid "OK"
+msgstr ""
+
+#: includes/class-inite-agents-admin-status.php:164
+msgid "Site"
+msgstr ""
+
+#: includes/class-inite-agents-admin-status.php:165
+msgid "Facts version"
+msgstr ""
+
+#: includes/class-inite-agents-admin-status.php:165
+msgid "confirmed"
+msgstr ""
+
+#: includes/class-inite-agents-admin-status.php:166
 msgid "Last sync"
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:147
+#: includes/class-inite-agents-admin-status.php:167
 msgid "Files"
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:151
+#: includes/class-inite-agents-admin-status.php:171
 msgid "MCP server"
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:154
+#: includes/class-inite-agents-admin-status.php:174
 msgid "Stored copy"
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:154
+#: includes/class-inite-agents-admin-status.php:174
 msgid "none: nothing is served"
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:170
+#: includes/class-inite-agents-admin-status.php:190
 msgid "never"
 msgstr ""
 
@@ -318,7 +330,7 @@ msgstr ""
 msgid "a file on the server"
 msgstr ""
 
-#: includes/class-inite-agents-settings.php:101
+#: includes/class-inite-agents-settings.php:104
 msgid "That does not look like a site key. It starts with isk_ and is 36 characters long."
 msgstr ""
 

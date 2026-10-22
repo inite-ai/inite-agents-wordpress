@@ -9,7 +9,7 @@
 | Requires at least | 6.0 |
 | Tested up to | 7.1 |
 | Requires PHP | 7.4 |
-| Stable tag | 0.3.0 |
+| Stable tag | 0.4.0 |
 | License | GPLv2 or later |
 | License URI | https://www.gnu.org/licenses/gpl-2.0.html |
 
@@ -23,9 +23,9 @@ The plugin keeps a copy of what INITE generated from those facts on your site an
 
 * **Root files.** `/llms.txt`, `/.well-known/agent-card.json` (A2A agent card), `/.well-known/mcp.json` (where your MCP server is) and `/.well-known/api-catalog`.
 * **robots.txt.** A `Content-Signal` line in the `User-agent: *` group: search and answers may use your content, training may not.
-* **Page head.** A small WebMCP script that offers the same facts as tools to an agent working in a visitor's browser, link tags pointing agents to the files, and JSON-LD (Organization or LocalBusiness, and FAQPage) on the front page.
+* **Page head.** A small WebMCP script, shipped with the plugin, that offers the same facts as tools to an agent working in a visitor's browser; link tags pointing agents to the files; and JSON-LD (Organization or LocalBusiness, and FAQPage) on the front page.
 * **Abilities for the WordPress MCP Adapter.** On WordPress 6.9 or later, five read-only abilities (`inite/business-facts`, `inite/services`, `inite/hours`, `inite/locations`, `inite/faq`). With the official [MCP Adapter](https://wordpress.org/plugins/mcp-adapter/) plugin active, an agent connected to your site can list and call them.
-* **Daily report.** Which paths the plugin serves and how many times known AI agents read them per day.
+* **Daily report** (off until you switch it on). Which paths the plugin serves and how many times known AI agents read them per day, shown in your INITE cabinet.
 * **Articles** (off until you switch it on). INITE drafts articles for your site from what people actually search for, and you approve each one in the INITE cabinet. The plugin turns every approved article into a WordPress post, as a draft for you to publish or published at once, as you choose, with its meta description for Yoast SEO or Rank Math. When the post is published, its address goes back to INITE. An article becomes one post, however often the plugin syncs. Nothing you did not approve is written.
 
 Each feature has its own switch. A feature that is off claims no URL and prints nothing.
@@ -99,8 +99,8 @@ This plugin talks to INITE (https://inite.ai), the service where you confirm you
 What is sent, when, and where:
 
 * **Sync** (every hour, when the settings are saved, when "Test connection" is pressed, and on activation): a request to `https://inite.ai/api/site/v1/manifest` and `https://inite.ai/api/site/v1/files/{name}` with your site key, the ETag of the copy held, and a user agent naming the plugin and WordPress versions. A request to `https://inite.ai/api/site/v1/public/{slug}` for the public facts, without the key.
-* **Daily report** (once a day, only while "Daily report" is on): a request to `https://inite.ai/api/site/v1/ping` with your site key, the plugin and WordPress versions, the paths the plugin serves, and for each of the last seven days the number of times each known AI agent (such as GPTBot, ClaudeBot or PerplexityBot) read those paths. No IP address, no full user agent, no cookie, nothing about human visitors.
-* **In your visitors' browsers** (only while "Page head" is on): the WebMCP script is loaded from `https://inite.ai/api/site/v1/webmcp.js`, and, only when an agent in the browser calls one of its tools, it reads your public facts from `https://inite.ai/api/site/v1/public/{slug}`. Like any file fetched from another site, that request carries the visitor's IP address and browser user agent to INITE; INITE sets and reads no cookie on it.
+* **Daily report** (once a day, only after you switch "Daily report" on; it is off by default): a request to `https://inite.ai/api/site/v1/ping` with your site key, the plugin and WordPress versions, the paths the plugin serves, and for each of the last seven days the number of times each known AI agent (such as GPTBot, ClaudeBot or PerplexityBot) read those paths. No IP address, no full user agent, no cookie, nothing about human visitors.
+* **In your visitors' browsers** (only while "Page head" is on): the WebMCP script is part of the plugin (`js/webmcp.js`) and is served from your own site; no code is loaded from INITE. Only when an agent in the browser calls one of its tools does the script read your public facts, a JSON document, from `https://inite.ai/api/site/v1/public/{slug}`, once per page, without cookies. Like any request to another site, it carries the visitor's IP address and browser user agent to INITE; INITE sets and reads no cookie on it. A page no agent works on makes no request to INITE.
 * **Articles** (only while "Articles" is on, on each sync): a request to `https://inite.ai/api/site/v1/content/queue` with your site key for the articles you approved, and, for each post made, a request to `https://inite.ai/api/site/v1/content/{id}/published` with the post's address, or to `https://inite.ai/api/site/v1/content/{id}/failed` with the reason it could not be made.
 * **Update check** (only in the copy downloaded from inite.ai, when WordPress checks for updates, at most twice a day): a request to `https://inite.ai/downloads/inite-agents.json` without the key, and the zip of a newer version when you update.
 * The link tags in the head point agents to your business's own address at `https://{slug}.inite.ai`.
@@ -108,7 +108,18 @@ What is sent, when, and where:
 INITE terms of service: https://inite.ai/en/terms
 INITE privacy policy: https://inite.ai/en/privacy
 
+## Screenshots
+
+1. Settings → INITE Agents after "Test connection": the site key and a switch for each feature, with what each one serves now. The daily report and articles stay off until you switch them on.
+2. The connection: the site, the facts version and when it was confirmed, the last sync, the files stored and the MCP server.
+3. What the plugin leaves alone: an `llms.txt` file already on the server, and a robots.txt file it cannot add to, with the line to paste into it.
+4. `/llms.txt` served from the site, built from the facts the business confirmed.
+
 ## Changelog
+
+### 0.4.0
+* The WebMCP script ships inside the plugin and is served from your site. Only the facts, a JSON document, are read from INITE, and only when an agent calls a tool.
+* The daily report is off until you switch it on. Sites that already switched it on keep it.
 
 ### 0.3.0
 * Updates from inite.ai: the copy downloaded from there shows new versions on the Plugins screen and updates like any other plugin.
@@ -121,6 +132,9 @@ INITE privacy policy: https://inite.ai/en/privacy
 * First release: root files, robots.txt Content-Signal, head tags, abilities for the MCP Adapter, daily report.
 
 ## Upgrade Notice
+
+### 0.4.0
+The WebMCP script is now served from your site, not from inite.ai. The daily report is off on new installs until you switch it on.
 
 ### 0.3.0
 Updates itself from inite.ai from now on. Install this one by hand once; later versions arrive on the Plugins screen.

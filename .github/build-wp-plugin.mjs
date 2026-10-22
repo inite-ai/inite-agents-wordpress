@@ -16,8 +16,10 @@
  * inite.ai: its header names `Update URI: https://inite.ai/downloads/inite-agents`.
  * The WordPress.org zip (`inite-agents-org.zip`, never public here) leaves
  * out the updater and that header line, as WordPress.org forbids a hosted
- * plugin to update from anywhere else; it is the one to submit there. The zip is
- * written here, without a dependency or the system `zip` (the image has
+ * plugin to update from anywhere else, and its readme says so (ORG_README);
+ * it is the one to submit there. Both carry the WebMCP script as a file
+ * (js/webmcp.js, from scripts/build-webmcp-script.mjs), so neither loads
+ * code from inite.ai. The zip is written here, without a dependency or the system `zip` (the image has
  * none): stored entries are deflated with node:zlib, and every entry has
  * the same date, so the same sources give the same bytes.
  *
@@ -42,6 +44,33 @@ export const DOWNLOADS = 'https://inite.ai/downloads'
 /** What the WordPress.org build leaves out. */
 export const UPDATER_FILE = 'includes/class-inite-agents-updater.php'
 const UPDATE_URI_LINE = /^ \* Update URI:.*\n/m
+
+/**
+ * What the WordPress.org readme says differently: that copy updates from
+ * WordPress.org, so the FAQ answer about updates is its own and the
+ * external service it never calls (the update check) is not listed. Each
+ * pattern must match, or the build stops: a reworded readme is noticed
+ * here, not by a reviewer.
+ */
+const ORG_README = [
+  {
+    what: 'the FAQ answer about updates',
+    from: /(= How is the plugin updated\? =\n\n)[^\n]+\n/,
+    to: '$1Like any plugin from WordPress.org: new versions appear on the Plugins screen, and automatic updates follow your WordPress setting for this plugin.\n',
+  },
+  { what: 'the update check among the external services', from: /^\* \*\*Update check\*\*[^\n]*\n/m, to: '' },
+  { what: "0.3.0's upgrade notice (updates from inite.ai)", from: /^= 0\.3\.0 =\nUpdates itself from inite\.ai[^\n]*\n\n/m, to: '' },
+]
+
+/** readme.txt as the WordPress.org copy carries it. Throws when a pattern no longer matches. */
+export function orgReadme(text) {
+  let out = text
+  for (const { what, from, to } of ORG_README) {
+    if (!from.test(out)) throw new Error(`inite-agents: the WordPress.org readme cannot rewrite ${what}: readme.txt changed`)
+    out = out.replace(from, to)
+  }
+  return out
+}
 
 /** 2026-01-01 00:00 in DOS time: one date for every entry. */
 const DOS_TIME = 0
@@ -151,6 +180,7 @@ export function buildPluginZip(dir = PLUGIN_DIR, { org = false } = {}) {
   const entries = files.map((rel) => {
     let data = readFileSync(path.join(dir, rel))
     if (org && rel === `${SLUG}.php`) data = Buffer.from(data.toString('utf8').replace(UPDATE_URI_LINE, ''), 'utf8')
+    if (org && rel === 'readme.txt') data = Buffer.from(orgReadme(data.toString('utf8')), 'utf8')
     return { name: `${SLUG}/${rel}`, data }
   })
   return { buffer: zip(entries), files, version: v.header }

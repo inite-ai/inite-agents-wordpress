@@ -23,7 +23,12 @@ final class Inite_Agents_Admin_Status {
 	 * @return string HTML.
 	 */
 	public static function feature( $feature ) {
-		$lines = call_user_func( array( __CLASS__, 'lines_' . $feature ) );
+		$method = 'lines_' . $feature;
+		// Every feature has its method (the plugin's tests hold that); an unknown one says nothing rather than break the screen.
+		if ( ! method_exists( __CLASS__, $method ) ) {
+			return '';
+		}
+		$lines = call_user_func( array( __CLASS__, $method ) );
 		if ( ! $lines ) {
 			return '';
 		}
@@ -118,12 +123,27 @@ final class Inite_Agents_Admin_Status {
 	 * @return string[]
 	 */
 	private static function lines_ping() {
+		if ( ! Inite_Agents_Settings::on( 'ping' ) ) {
+			return array( esc_html__( 'Off: nothing is sent, and agent reads are not counted.', 'inite-agents' ) );
+		}
 		$total = 0;
 		foreach ( Inite_Agents_Visitors::rows() as $row ) {
 			$total += $row['hits'];
 		}
 		/* translators: %d: number of reads. */
 		return array( esc_html( sprintf( _n( 'AI agents read the served paths %d time in the last 7 days.', 'AI agents read the served paths %d times in the last 7 days.', $total, 'inite-agents' ), $total ) ) );
+	}
+
+	/**
+	 * Articles.
+	 *
+	 * @return string[]
+	 */
+	private static function lines_content() {
+		if ( ! Inite_Agents_Settings::on( 'content' ) ) {
+			return array( esc_html__( 'Off: no post is made. The articles you approve wait in your INITE cabinet.', 'inite-agents' ) );
+		}
+		return array( esc_html__( 'The articles you approve in the INITE cabinet become posts at the next hourly sync, as "New articles" below says.', 'inite-agents' ) );
 	}
 
 	/**

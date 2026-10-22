@@ -162,11 +162,36 @@ final class Inite_Agents_Sync {
 			'mcp'   => isset( $m['mcp']['url'] ) ? esc_url_raw( (string) $m['mcp']['url'], array( 'https', 'http' ) ) : '',
 			'files' => $files,
 			'head'  => array(
-				'script' => isset( $head['script']['src'] ) ? esc_url_raw( (string) $head['script']['src'], array( 'https', 'http' ) ) : '',
 				'links'  => $links,
 				'jsonLd' => isset( $head['jsonLd'] ) && is_array( $head['jsonLd'] ) ? $head['jsonLd'] : array(),
 			),
 		);
+	}
+
+	/**
+	 * The path of the site's public facts: what the sync reads, and what the
+	 * WebMCP script in the head reads when an agent calls a tool.
+	 *
+	 * @param array $site The manifest's site block.
+	 * @return string
+	 */
+	public static function facts_path( array $site ) {
+		$slug   = isset( $site['slug'] ) ? (string) $site['slug'] : '';
+		$domain = isset( $site['domain'] ) ? (string) $site['domain'] : '';
+		return '/api/site/v1/public/' . rawurlencode( $slug ) . ( '' !== $domain ? '?d=' . rawurlencode( $domain ) : '' );
+	}
+
+	/**
+	 * The full address of the site's public facts, or '' without a slug.
+	 *
+	 * @param array $site The manifest's site block.
+	 * @return string
+	 */
+	public static function facts_url( array $site ) {
+		if ( empty( $site['slug'] ) || ! preg_match( '/^[a-z0-9][a-z0-9-]{0,62}$/', (string) $site['slug'] ) ) {
+			return '';
+		}
+		return Inite_Agents_Settings::api_base() . self::facts_path( $site );
 	}
 
 	/**
@@ -176,8 +201,7 @@ final class Inite_Agents_Sync {
 	 * @return array|null
 	 */
 	private static function facts( array $site ) {
-		$path = '/api/site/v1/public/' . rawurlencode( $site['slug'] ) . ( $site['domain'] ? '?d=' . rawurlencode( $site['domain'] ) : '' );
-		$got  = Inite_Agents_Client::get( $path, '', null, false );
+		$got = Inite_Agents_Client::get( self::facts_path( $site ), '', null, false );
 		if ( 200 !== $got['status'] ) {
 			return null;
 		}

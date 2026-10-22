@@ -20,11 +20,14 @@ final class Inite_Agents_Settings {
 
 	const OPTION = 'inite_agents_settings';
 
-	/** The features the owner switches, each off by default until a key is saved. */
+	/** The features the owner switches. None does anything until a key is saved. */
 	const FEATURES = array( 'files', 'robots', 'head', 'abilities', 'ping', 'content' );
 
-	/** Features that stay off until the owner switches them on: articles write into the site. */
-	const OFF_BY_DEFAULT = array( 'content' );
+	/**
+	 * Features that stay off until the owner switches them on: the daily
+	 * report sends INITE counts from this site, and articles write into it.
+	 */
+	const OFF_BY_DEFAULT = array( 'ping', 'content' );
 
 	/**
 	 * Cached settings for this request.
