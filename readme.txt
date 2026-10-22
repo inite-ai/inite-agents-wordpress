@@ -122,3 +122,7 @@ Updates itself from inite.ai from now on. Install this one by hand once; later v
 
 = 0.2.0 =
 Adds Articles: posts from the articles you approved in INITE. Off until you switch it on.
+
+== Development ==
+
+The plugin's source is public at https://github.com/inite-ai/inite-agents-wordpress, a read-only mirror updated on every change, with both zips attached to a GitHub Release for each version. Docs for every INITE Agents connector, webhook examples and issues: https://github.com/inite-ai/inite-agents. Security reports: security@inite.ai.
