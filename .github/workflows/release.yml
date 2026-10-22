@@ -1,0 +1,100 @@
+name: Release
+
+# This repository is a read-only mirror: INITE's monorepo pushes the plugin
+# here on every change (its workflow mirror-inite-agents-wordpress.yml). When
+# main carries a plugin version that has no GitHub Release yet, this builds
+# the two zips with the monorepo's own build script (.github/build-wp-plugin.mjs,
+# mirrored beside the plugin) and makes the Release v<version>:
+#
+#   inite-agents.zip      the copy inite.ai serves; it updates itself from inite.ai
+#   inite-agents-org.zip  the WordPress.org variant, without the self-updater
+#
+# The script writes every zip entry with one date, so the same sources give
+# the same bytes as the zip on inite.ai. Never runs for pull requests.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Is there a release for this version?
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if [ ! -f inite-agents.php ] || [ ! -f .github/build-wp-plugin.mjs ]; then
+            echo "::notice::No plugin here yet; nothing to release."
+            echo "release=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          VERSION="$(sed -n 's/^ \* Version: *//p' inite-agents.php)"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          if gh release view "v$VERSION" >/dev/null 2>&1; then
+            echo "::notice::v$VERSION is released already."
+            echo "release=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "release=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Build both zips
+        if: steps.check.outputs.release == 'true'
+        run: |
+          set -euo pipefail
+          # The layout the build script expects: <root>/scripts and <root>/plugins/wordpress/inite-agents.
+          B="$RUNNER_TEMP/build"
+          mkdir -p "$B/scripts" "$B/plugins/wordpress/inite-agents"
+          cp .github/build-wp-plugin.mjs "$B/scripts/"
+          git ls-files | grep -v -e '^\.' -e '^README\.md$' -e '^LICENSE$' | while read -r f; do
+            mkdir -p "$B/plugins/wordpress/inite-agents/$(dirname "$f")"
+            cp "$f" "$B/plugins/wordpress/inite-agents/$f"
+          done
+          node "$B/scripts/build-wp-plugin.mjs"
+          echo "DIST=$B/plugins/wordpress/dist" >> "$GITHUB_ENV"
+
+      - name: Release notes from the readme's changelog
+        if: steps.check.outputs.release == 'true'
+        env:
+          VERSION: ${{ steps.check.outputs.version }}
+        run: |
+          set -euo pipefail
+          {
+            awk -v v="= $VERSION =" '
+              /^== Changelog ==/ { inlog = 1; next }
+              inlog && /^== / { exit }
+              inlog && $0 == v { on = 1; next }
+              inlog && on && /^= / { exit }
+              inlog && on { print }
+            ' readme.txt
+            echo
+            echo "**inite-agents.zip** is the copy inite.ai serves: it updates itself from inite.ai. **inite-agents-org.zip** is the WordPress.org variant, without the self-updater. Install either under Plugins, Add New Plugin, Upload Plugin."
+            echo
+            echo "Setup: https://github.com/inite-ai/inite-agents/blob/main/docs/wordpress.md"
+          } > "$RUNNER_TEMP/notes.md"
+          cat "$RUNNER_TEMP/notes.md"
+
+      - name: Create the release
+        if: steps.check.outputs.release == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.check.outputs.version }}
+        run: |
+          set -euo pipefail
+          gh release create "v$VERSION" \
+            "$DIST/inite-agents.zip#inite-agents.zip (from inite.ai, updates itself)" \
+            "$DIST/inite-agents-org.zip#inite-agents-org.zip (WordPress.org variant)" \
+            --target "$GITHUB_SHA" --title "INITE Agents $VERSION" --notes-file "$RUNNER_TEMP/notes.md"
