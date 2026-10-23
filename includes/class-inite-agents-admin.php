@@ -184,6 +184,7 @@ final class Inite_Agents_Admin {
 			esc_html__( 'Publish at once', 'inite-agents' )
 		);
 		echo '</table>';
+		Inite_Agents_Admin_Sending::render( $s, $name );
 		submit_button();
 		echo '</form>';
 
@@ -203,7 +204,7 @@ final class Inite_Agents_Admin {
 	 */
 	private static function features() {
 		return array(
-			'files'     => array( __( 'Root files', 'inite-agents' ), __( 'Serve /llms.txt, /.well-known/agent-card.json, /.well-known/mcp.json and /.well-known/api-catalog', 'inite-agents' ) ),
+			'files'     => array( __( 'Root files', 'inite-agents' ), __( 'Serve /llms.txt, /llms-full.txt, /.well-known/agent-card.json, /.well-known/mcp.json and /.well-known/api-catalog', 'inite-agents' ) ),
 			'robots'    => array( __( 'robots.txt', 'inite-agents' ), __( 'Add the Content-Signal line to robots.txt', 'inite-agents' ) ),
 			'head'      => array( __( 'Page head', 'inite-agents' ), __( 'Add the WebMCP script and the links to the files', 'inite-agents' ) ),
 			'abilities' => array( __( 'Abilities for the MCP Adapter', 'inite-agents' ), __( 'Register five read-only abilities agents can call through the WordPress MCP Adapter', 'inite-agents' ) ),

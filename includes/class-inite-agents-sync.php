@@ -27,10 +27,10 @@ final class Inite_Agents_Sync {
 	const CRON = 'inite_agents_sync';
 
 	/** The files the service names that this plugin knows how to place. */
-	const KNOWN_FILES = array( 'llms.txt', 'agent-card.json', 'mcp.json', 'api-catalog', 'robots-signal', 'jsonld' );
+	const KNOWN_FILES = array( 'llms.txt', 'llms-full.txt', 'agent-card.json', 'mcp.json', 'api-catalog', 'robots-signal', 'jsonld' );
 
 	/** The root paths a file may be served at. Nothing else is ever claimed. */
-	const ROOT_PATHS = array( '/llms.txt', '/.well-known/agent-card.json', '/.well-known/mcp.json', '/.well-known/api-catalog' );
+	const ROOT_PATHS = array( '/llms.txt', '/llms-full.txt', '/.well-known/agent-card.json', '/.well-known/mcp.json', '/.well-known/api-catalog' );
 
 	/**
 	 * One sync.

@@ -4,8 +4,9 @@
  *
  * Every address is built from the configured origin, never taken from a
  * response, so the site key is only ever sent to that origin. Each call
- * waits five seconds at most and runs only from cron, activation or the
- * settings screen, never while a visitor's page renders.
+ * waits five seconds at most (an upload of records fifteen) and runs only
+ * from cron, activation or the settings screen, never while a visitor's
+ * page renders.
  *
  * @package Inite_Agents
  */
@@ -60,17 +61,18 @@ final class Inite_Agents_Client {
 	/**
 	 * POST JSON to a connector path with the site key.
 	 *
-	 * @param string $path Path under the origin.
-	 * @param string $key  Site key.
-	 * @param array  $body Body, sent as JSON.
+	 * @param string $path    Path under the origin.
+	 * @param string $key     Site key.
+	 * @param array  $body    Body, sent as JSON.
+	 * @param int    $timeout Seconds to wait; an upload of a page of records waits longer (Inite_Agents_Records).
 	 * @return array{status:int,body:string,etag:string,type:string,error:string}
 	 */
-	public static function post( $path, $key, array $body ) {
+	public static function post( $path, $key, array $body, $timeout = self::TIMEOUT ) {
 		return self::answer(
 			wp_remote_post(
 				Inite_Agents_Settings::api_base() . $path,
 				array(
-					'timeout'     => self::TIMEOUT,
+					'timeout'     => (int) $timeout,
 					'redirection' => 0,
 					'headers'     => array(
 						'Authorization' => 'Bearer ' . $key,

@@ -1,6 +1,6 @@
 <?php
 /**
- * Wiring: each feature hooks in only while it is on, the two cron events,
+ * Wiring: each feature hooks in only while it is on, the cron events,
  * activation and deactivation.
  *
  * @package Inite_Agents
@@ -31,6 +31,7 @@ final class Inite_Agents_Plugin {
 		add_action( 'add_option_' . Inite_Agents_Settings::OPTION, array( __CLASS__, 'saved' ), 10, 0 );
 
 		Inite_Agents_Content::register();
+		Inite_Agents_Records::register();
 		if ( is_admin() ) {
 			Inite_Agents_Admin::register();
 			Inite_Agents_Requests::register();
@@ -64,8 +65,11 @@ final class Inite_Agents_Plugin {
 		}
 	}
 
-	/** The two events, scheduled once. */
+	/** The three events, scheduled once: the sync and the records hourly, the report daily. */
 	public static function schedule() {
+		if ( ! wp_next_scheduled( Inite_Agents_Records::CRON ) ) {
+			wp_schedule_event( time() + 120, 'hourly', Inite_Agents_Records::CRON );
+		}
 		if ( ! wp_next_scheduled( Inite_Agents_Sync::CRON ) ) {
 			wp_schedule_event( time() + 60, 'hourly', Inite_Agents_Sync::CRON );
 		}
@@ -86,5 +90,7 @@ final class Inite_Agents_Plugin {
 	public static function deactivate() {
 		wp_clear_scheduled_hook( Inite_Agents_Sync::CRON );
 		wp_clear_scheduled_hook( Inite_Agents_Ping::CRON );
+		wp_clear_scheduled_hook( Inite_Agents_Records::CRON );
+		wp_clear_scheduled_hook( Inite_Agents_Records::CRON . '_now' );
 	}
 }

@@ -183,4 +183,38 @@ final class Inite_Agents_Admin_Status {
 	private static function when( $ts ) {
 		return $ts ? wp_date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), (int) $ts ) : __( 'never', 'inite-agents' );
 	}
+
+	/**
+	 * The switches of "What this site sends to INITE" (Inite_Agents_Admin_Sending says what each sends).
+	 *
+	 * @return string[]
+	 */
+	private static function lines_send_basics() {
+		return Inite_Agents_Admin_Sending::lines( 'send_basics' );
+	}
+
+	/** @return string[] */
+	private static function lines_send_content() {
+		return Inite_Agents_Admin_Sending::lines( 'send_content' );
+	}
+
+	/** @return string[] */
+	private static function lines_send_products() {
+		return Inite_Agents_Admin_Sending::lines( 'send_products' );
+	}
+
+	/** @return string[] */
+	private static function lines_send_events() {
+		return Inite_Agents_Admin_Sending::lines( 'send_events' );
+	}
+
+	/** @return string[] */
+	private static function lines_send_services() {
+		return Inite_Agents_Admin_Sending::lines( 'send_services' );
+	}
+
+	/** @return string[] */
+	private static function lines_send_locations() {
+		return Inite_Agents_Admin_Sending::lines( 'send_locations' );
+	}
 }

@@ -20,14 +20,18 @@ final class Inite_Agents_Settings {
 
 	const OPTION = 'inite_agents_settings';
 
+	/** What the site sends to INITE, each switched on by the owner (Inite_Agents_Admin_Sending lists what each sends). */
+	const SENDS = array( 'send_basics', 'send_content', 'send_products', 'send_events', 'send_services', 'send_locations' );
+
 	/** The features the owner switches. None does anything until a key is saved. */
-	const FEATURES = array( 'files', 'robots', 'head', 'abilities', 'ping', 'content' );
+	const FEATURES = array( 'files', 'robots', 'head', 'abilities', 'ping', 'content', 'send_basics', 'send_content', 'send_products', 'send_events', 'send_services', 'send_locations' );
 
 	/**
 	 * Features that stay off until the owner switches them on: the daily
-	 * report sends INITE counts from this site, and articles write into it.
+	 * report sends INITE counts from this site, articles write into it, and
+	 * nothing about the site's own content leaves it until its switch is on.
 	 */
-	const OFF_BY_DEFAULT = array( 'ping', 'content' );
+	const OFF_BY_DEFAULT = array( 'ping', 'content', 'send_basics', 'send_content', 'send_products', 'send_events', 'send_services', 'send_locations' );
 
 	/**
 	 * The one-click fixes (Inite_Agents_Fixes). The two JSON-LD types the

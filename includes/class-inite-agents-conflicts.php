@@ -32,7 +32,8 @@ final class Inite_Agents_Conflicts {
 	 */
 	public static function owner( $path ) {
 		// The plugin is named before its file: Yoast SEO, for one, writes llms.txt to disk.
-		$owner = '/llms.txt' === $path ? self::llms_plugin() : '';
+		// A plugin that makes llms.txt may make llms-full.txt too (Website LLMs.txt does): both stay its own.
+		$owner = in_array( $path, array( '/llms.txt', '/llms-full.txt' ), true ) ? self::llms_plugin() : '';
 		if ( '' === $owner && self::physical( $path ) ) {
 			$owner = __( 'a file on the server', 'inite-agents' );
 		}

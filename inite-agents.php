@@ -2,8 +2,8 @@
 /**
  * Plugin Name:       INITE Agents
  * Plugin URI:        https://inite.ai/
- * Description:       Serves the facts your business confirmed in INITE to AI agents (llms.txt, the agent card and MCP files, robots.txt signals, head tags, JSON-LD, abilities for the MCP Adapter) and shows in WordPress what agents and assistants do with your site.
- * Version:           0.7.0
+ * Description:       Serves the facts your business confirmed in INITE to AI agents (llms.txt and llms-full.txt, the agent card and MCP files, robots.txt signals, head tags, JSON-LD, abilities for the MCP Adapter), shows in WordPress what agents and assistants do with your site, and sends INITE the pages, products and events you switch on.
+ * Version:           0.8.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
  * Author:            INITE
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'INITE_AGENTS_VERSION', '0.7.0' );
+define( 'INITE_AGENTS_VERSION', '0.8.0' );
 define( 'INITE_AGENTS_FILE', __FILE__ );
 define( 'INITE_AGENTS_DIR', plugin_dir_path( __FILE__ ) );
 
@@ -40,9 +40,13 @@ require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-referrals.php';
 require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-summary.php';
 require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-abilities.php';
 require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-ping.php';
+require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-plugins.php';
 require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-basics.php';
+require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-collect.php';
+require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-records.php';
 require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-content.php';
 require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-admin-status.php';
+require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-admin-sending.php';
 require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-admin-overview.php';
 require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-admin-fixes.php';
 require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-admin.php';

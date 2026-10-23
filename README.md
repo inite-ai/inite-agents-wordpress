@@ -9,7 +9,7 @@
 | Requires at least | 6.0 |
 | Tested up to | 7.1 |
 | Requires PHP | 7.4 |
-| Stable tag | 0.7.0 |
+| Stable tag | 0.8.0 |
 | License | GPLv2 or later |
 | License URI | https://www.gnu.org/licenses/gpl-2.0.html |
 
@@ -21,7 +21,7 @@ INITE Agents connects your WordPress site to [INITE](https://inite.ai/), where y
 
 The plugin keeps a copy of what INITE generated from those facts on your site and serves it from there:
 
-* **Root files.** `/llms.txt`, `/.well-known/agent-card.json` (A2A agent card), `/.well-known/mcp.json` (where your MCP server is) and `/.well-known/api-catalog`.
+* **Root files.** `/llms.txt`, `/llms-full.txt`, `/.well-known/agent-card.json` (A2A agent card), `/.well-known/mcp.json` (where your MCP server is) and `/.well-known/api-catalog`.
 * **robots.txt.** A `Content-Signal` line in the `User-agent: *` group: search and answers may use your content, training may not.
 * **Page head.** A small WebMCP script, shipped with the plugin, that offers the same facts as tools to an agent working in a visitor's browser, and link tags pointing agents to the files.
 * **Abilities for the WordPress MCP Adapter.** On WordPress 6.9 or later, five read-only abilities (`inite/business-facts`, `inite/services`, `inite/hours`, `inite/locations`, `inite/faq`). With the official [MCP Adapter](https://wordpress.org/plugins/mcp-adapter/) plugin active, an agent connected to your site can list and call them.
@@ -30,6 +30,17 @@ The plugin keeps a copy of what INITE generated from those facts on your site an
 * **Articles** (off until you switch it on). INITE drafts articles for your site from what people actually search for, and you approve each one in the INITE cabinet. The plugin turns every approved article into a WordPress post, as a draft for you to publish or published at once, as you choose, with its meta description for Yoast SEO or Rank Math. When the post is published, its address goes back to INITE. An article becomes one post, however often the plugin syncs. Nothing you did not approve is written.
 
 Each feature has its own switch. A feature that is off claims no URL and prints nothing.
+
+**What this site sends to INITE.** A second list of switches, all off until you turn them on, says exactly what leaves your site and what INITE does with it. Each is content your site already shows to anyone; nothing about a person.
+
+* **Site basics:** the title, tagline, language and address, and the WooCommerce product count. Suggested in the cabinet as your business's name and description.
+* **Pages and posts:** title, address, excerpt or first 300 characters, type, language, last change, for published pages and posts without a password and not marked noindex. Listed in llms.txt and llms-full.txt. Up to 2,000.
+* **Products** (WooCommerce): name, address, price, regular and sale price, currency, stock status, SKU, short description, categories, image address. Published only after you turn on "Publish my catalogue" in the cabinet; then agents read your products as your store holds them, in llms.txt and through the MCP tools `products` and `product`. Up to 2,000.
+* **Events** (The Events Calendar): upcoming events with their title, address, start, end and venue. Listed in llms.txt. Up to 200.
+* **Services from booking plugins** (Bookly, Amelia): the services shown to customers, with duration and price. Suggestions in the cabinet.
+* **Locations and hours** (WP Store Locator, Yoast Local SEO, Rank Math Local SEO): addresses, phones and opening hours. Suggestions in the cabinet.
+
+Only what changed is sent, a hundred items at a time, by WP-Cron every hour. Switch a kind off and INITE deletes what it received of it.
 
 **What you get back, inside WordPress.** A dashboard widget and an **Overview** tab under **Settings → INITE Agents**: the AI visibility score of your site's latest INITE analysis and the checks it failed, what AI assistants say about your business against the facts you confirmed (once INITE has checked), which AI agents read which of your pages, how many people came from AI assistants and to which pages, and the suggestions and articles waiting for you in INITE. Each line links to where it is acted on. Breakdowns INITE keeps for Atlas Premium arrive as totals without it; the counts the plugin keeps itself are always shown in full.
 
@@ -76,6 +87,14 @@ Counted, not tracked, and only while "Daily report" is on. A page view counts wh
 
 Yes, from its own servers, not through the plugin: once a day, up to eight public pages (the homepage and the pages about prices, services, contact, hours, FAQ or menu), obeying your robots.txt. What it finds that your facts do not say appears in the INITE cabinet as a suggestion to accept or ignore. Nothing changes in your published facts unless you confirm it, or turn on "Keep in step with my site" in the cabinet for values your site states in its schema.org markup.
 
+### What does the plugin send to INITE?
+
+The site key and the plugin's version with every request, and nothing else until you switch it on under "What this site sends to INITE". Each switch names the fields it sends. Nothing about users, customers, orders or visitors is ever read or sent. Switching a kind off makes INITE delete what it received of it, at the plugin's next run.
+
+### Are my products published as soon as I send them?
+
+No. They appear in your INITE cabinet first. Only when the company's owner turns on "Publish my catalogue" there are they published, and from then on they follow your store: a new price, a product out of stock or removed reaches agents within the hour, without a confirmation each time.
+
 ### What happens if INITE is down?
 
 Nothing visible. The site serves the copy it already stored, and tries again an hour later.
@@ -119,7 +138,8 @@ This plugin talks to INITE (https://inite.ai), the service where you confirm you
 What is sent, when, and where:
 
 * **Sync** (every hour, when the settings are saved, when "Test connection" is pressed, and on activation): a request to `https://inite.ai/api/site/v1/manifest` and `https://inite.ai/api/site/v1/files/{name}` with your site key, the ETag of the copy held, and a user agent naming the plugin and WordPress versions. A request to `https://inite.ai/api/site/v1/public/{slug}` for the public facts, without the key.
-* **Site basics** (with the hourly sync, only when they changed, and at most once a day otherwise): a request to `https://inite.ai/api/site/v1/ping` with your site key, the plugin version and a `site` field holding your site's title and tagline (Settings → General), its language and address, and, if WooCommerce is active, the number of published products. INITE uses them to suggest your business's name and description in your cabinet; nothing is published until you accept and confirm it. No user, no email address, nothing about visitors.
+* **Site basics, services and locations** (off by default; with the hourly sync, only when they changed, and at most once a day otherwise): a request to `https://inite.ai/api/site/v1/ping` with your site key, the plugin version and a `site` field. With "Site basics" on it holds your site's title and tagline (Settings → General), its language and address, and, if WooCommerce is active, the number of published products. With "Services from booking plugins" on, the services Bookly or Amelia show to customers (name, duration, description, price, currency). With "Locations and hours" on, the addresses, phones and opening hours of WP Store Locator, Yoast Local SEO or Rank Math Local SEO. INITE shows them in your cabinet as suggestions; nothing is published until you accept and confirm it. No user, no email address, nothing about visitors.
+* **Pages, posts, products and events** (each off by default, each under its own switch; every hour, only what changed): requests to `https://inite.ai/api/site/v1/records` with your site key and up to 100 items at a time. Pages and posts: title, address, excerpt or first 300 characters, type, language and when it changed. Products (WooCommerce): name, address, price, regular and sale price, currency, stock status, SKU, short description, categories, image address. Events (The Events Calendar): title, address, excerpt, start, end, venue. Once a day the ids still published are sent, so INITE drops what was removed; when you switch a kind off, a request tells INITE to delete it. INITE lists pages, posts and events in your llms.txt and llms-full.txt, and publishes products only after you turn on "Publish my catalogue" in the cabinet. Nothing about users, customers or orders.
 * **Daily report** (once a day, only after you switch "Daily report" on; it is off by default): a request to `https://inite.ai/api/site/v1/ping` with your site key, the plugin and WordPress versions, the paths the plugin serves, for each of the last seven days the number of times each known AI agent (such as GPTBot, ClaudeBot or PerplexityBot) read those paths, and the number of visits per page that came from an AI assistant (the `referrals` field: day, path, assistant, count). No IP address, no full user agent, no cookie, nothing that identifies a visitor.
 * **Summary** (for the dashboard widget and the Overview tab, at most every four hours on the hourly sync, when the Overview finds nothing held, and when you press "Refresh"): a request to `https://inite.ai/api/site/v1/summary` with your site key. It sends nothing else and reads what INITE knows about the site: the latest analysis's score and failed checks, counts of agent reads, MCP calls and visits from AI assistants, and how many suggestions and articles wait for you.
 * **Requests from agents** (only while you send them to the plugin in the INITE cabinet): opening **Agent requests** asks `https://inite.ai/api/site/v1/requests` with your site key for the list, which is not stored on your site; marking a request answered or spam sends that status to `https://inite.ai/api/site/v1/requests/{id}`.
@@ -139,6 +159,11 @@ INITE privacy policy: https://inite.ai/en/privacy
 4. `/llms.txt` served from the site, built from the facts the business confirmed.
 
 ## Changelog
+
+### 0.8.0
+* "What this site sends to INITE": a switch for each kind of data, each off until you turn it on and each naming the fields it sends. Pages and posts, WooCommerce products and The Events Calendar's events are sent a hundred at a time, only what changed, and deleted at INITE when you switch them off. Services from Bookly or Amelia, and locations and hours from WP Store Locator, Yoast Local SEO or Rank Math Local SEO, arrive in the cabinet as suggestions.
+* `/llms-full.txt`: your confirmed facts, then every page, article, event and published product. Left alone, like llms.txt, where another plugin serves its own.
+* Site basics are now off until you switch them on.
 
 ### 0.7.0
 * Requests from agents: when you send them to the plugin in the INITE cabinet, the requests AI agents left for your business appear under Agent requests, to mark answered or spam; the WebMCP script offers agents request_contact (and request_booking when you take bookings).
@@ -164,6 +189,9 @@ INITE privacy policy: https://inite.ai/en/privacy
 * First release: root files, robots.txt Content-Signal, head tags, abilities for the MCP Adapter, daily report.
 
 ## Upgrade Notice
+
+### 0.8.0
+Adds "What this site sends to INITE": pages, products, events, booking services and locations, each sent only after you switch it on. Site basics are now off until you switch them on too.
 
 ### 0.7.0
 Adds an Overview, a dashboard widget, one-click Fixes and Requests from agents. The JSON-LD your site printed stays as it was; every new fix is off until you switch it on.
