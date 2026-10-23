@@ -1,7 +1,9 @@
 <?php
 /**
- * Settings → INITE Agents: the site key, the features, and what the site
- * serves right now, with whatever stands in the way of a feature.
+ * Settings → INITE Agents, in three tabs: Overview (what INITE knows about
+ * the site, Inite_Agents_Admin_Overview), Fixes (Inite_Agents_Admin_Fixes),
+ * and Settings: the site key, the features, and what the site serves right
+ * now, with whatever stands in the way of a feature.
  *
  * @package Inite_Agents
  */
@@ -22,6 +24,7 @@ final class Inite_Agents_Admin {
 		add_action( 'admin_menu', array( __CLASS__, 'menu' ) );
 		add_action( 'admin_init', array( __CLASS__, 'settings' ) );
 		add_action( 'admin_post_inite_agents_test', array( __CLASS__, 'test' ) );
+		Inite_Agents_Admin_Overview::register();
 		add_filter( 'plugin_action_links_' . plugin_basename( INITE_AGENTS_FILE ), array( __CLASS__, 'action_link' ) );
 	}
 
@@ -63,7 +66,7 @@ final class Inite_Agents_Admin {
 		$result = Inite_Agents_Sync::run( true );
 		Inite_Agents_Plugin::schedule();
 		set_transient( 'inite_agents_test_' . get_current_user_id(), $result, 120 );
-		wp_safe_redirect( admin_url( 'options-general.php?page=' . self::PAGE . '&tested=1' ) );
+		wp_safe_redirect( self::url( 'settings' ) . '&tested=1' );
 		exit;
 	}
 
@@ -81,18 +84,64 @@ final class Inite_Agents_Admin {
 		return '' !== $slug ? $base . '/' . $lang . '/' . rawurlencode( $slug ) . '/profile?tab=agents' : $base . '/' . $lang . '/login';
 	}
 
-	/** The screen. */
+	/**
+	 * A tab's address.
+	 *
+	 * @param string $tab overview, fixes or settings.
+	 * @return string
+	 */
+	public static function url( $tab = 'overview' ) {
+		return admin_url( 'options-general.php?page=' . self::PAGE . '&tab=' . rawurlencode( $tab ) );
+	}
+
+	/**
+	 * The tab asked for: Overview once a key is saved, Settings before.
+	 *
+	 * @return string
+	 */
+	private static function tab() {
+		$tab = isset( $_GET['tab'] ) ? sanitize_key( wp_unslash( $_GET['tab'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- only picks which tab to show.
+		if ( in_array( $tab, array( 'overview', 'fixes', 'settings' ), true ) ) {
+			return $tab;
+		}
+		return '' === Inite_Agents_Settings::get()['key'] ? 'settings' : 'overview';
+	}
+
+	/** The screen: the tabs, then the one asked for. */
 	public static function render() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
+		$tab  = self::tab();
+		$tabs = array(
+			'overview' => __( 'Overview', 'inite-agents' ),
+			'fixes'    => __( 'Fixes', 'inite-agents' ),
+			'settings' => __( 'Settings', 'inite-agents' ),
+		);
+		echo '<div class="wrap"><h1>' . esc_html__( 'INITE Agents', 'inite-agents' ) . '</h1>';
+		settings_errors( Inite_Agents_Settings::OPTION );
+		echo '<nav class="nav-tab-wrapper" aria-label="' . esc_attr__( 'INITE Agents sections', 'inite-agents' ) . '">';
+		foreach ( $tabs as $key => $label ) {
+			echo '<a href="' . esc_url( self::url( $key ) ) . '" class="nav-tab' . ( $key === $tab ? ' nav-tab-active" aria-current="page' : '' ) . '">' . esc_html( $label ) . '</a>';
+		}
+		echo '</nav>';
+		if ( 'overview' === $tab ) {
+			Inite_Agents_Admin_Overview::render();
+		} elseif ( 'fixes' === $tab ) {
+			Inite_Agents_Admin_Fixes::render();
+		} else {
+			self::render_settings();
+		}
+		echo '</div>';
+	}
+
+	/** The Settings tab. */
+	private static function render_settings() {
 		$s      = Inite_Agents_Settings::get();
 		$copy   = Inite_Agents_Store::get();
 		$status = Inite_Agents_Store::status();
 		$name   = Inite_Agents_Settings::OPTION;
 		$tested = isset( $_GET['tested'] ) ? get_transient( 'inite_agents_test_' . get_current_user_id() ) : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- only picks which notice to show.
-		echo '<div class="wrap"><h1>' . esc_html__( 'INITE Agents', 'inite-agents' ) . '</h1>';
-		settings_errors( $name );
 		if ( is_array( $tested ) ) {
 			$class = $tested['ok'] ? 'notice-success' : 'notice-error';
 			$text  = $tested['ok'] ? __( 'Connected. The files below are the copy now stored.', 'inite-agents' ) : $tested['error'];
@@ -144,7 +193,7 @@ final class Inite_Agents_Admin {
 		echo '<input type="hidden" name="action" value="inite_agents_test">';
 		wp_nonce_field( 'inite_agents_test' );
 		submit_button( __( 'Test connection', 'inite-agents' ), 'secondary', 'submit', false, '' === $s['key'] ? array( 'disabled' => 'disabled' ) : null );
-		echo '</form></div>';
+		echo '</form>';
 	}
 
 	/**
@@ -156,9 +205,9 @@ final class Inite_Agents_Admin {
 		return array(
 			'files'     => array( __( 'Root files', 'inite-agents' ), __( 'Serve /llms.txt, /.well-known/agent-card.json, /.well-known/mcp.json and /.well-known/api-catalog', 'inite-agents' ) ),
 			'robots'    => array( __( 'robots.txt', 'inite-agents' ), __( 'Add the Content-Signal line to robots.txt', 'inite-agents' ) ),
-			'head'      => array( __( 'Page head', 'inite-agents' ), __( 'Add the WebMCP script, the links to the files and the JSON-LD', 'inite-agents' ) ),
+			'head'      => array( __( 'Page head', 'inite-agents' ), __( 'Add the WebMCP script and the links to the files', 'inite-agents' ) ),
 			'abilities' => array( __( 'Abilities for the MCP Adapter', 'inite-agents' ), __( 'Register five read-only abilities agents can call through the WordPress MCP Adapter', 'inite-agents' ) ),
-			'ping'      => array( __( 'Daily report', 'inite-agents' ), __( 'Send INITE the plugin version, the paths served and daily counts of AI agent reads (no visitor data)', 'inite-agents' ) ),
+			'ping'      => array( __( 'Daily report', 'inite-agents' ), __( 'Count AI agent reads and visits from AI assistants, and send INITE the counts with the plugin version and the paths served (counts only: no address, no cookie)', 'inite-agents' ) ),
 			'content'   => array( __( 'Articles', 'inite-agents' ), __( 'Create posts from the articles you approved in the INITE cabinet, and tell INITE their addresses', 'inite-agents' ) ),
 		);
 	}

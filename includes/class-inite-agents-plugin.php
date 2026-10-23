@@ -21,6 +21,9 @@ final class Inite_Agents_Plugin {
 		Inite_Agents_Robots::register();
 		Inite_Agents_Head::register();
 		Inite_Agents_Abilities::register();
+		Inite_Agents_Schema::register();
+		Inite_Agents_Fixes::register();
+		Inite_Agents_Referrals::register();
 
 		add_action( Inite_Agents_Sync::CRON, array( __CLASS__, 'cron_sync' ) );
 		add_action( Inite_Agents_Ping::CRON, array( 'Inite_Agents_Ping', 'run' ) );
@@ -45,6 +48,7 @@ final class Inite_Agents_Plugin {
 		// The site's basics only to a service that took the key: a refused one has nothing to read them for.
 		if ( ! empty( $synced['ok'] ) ) {
 			Inite_Agents_Basics::run();
+			Inite_Agents_Summary::cron();
 		}
 	}
 

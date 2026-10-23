@@ -2,22 +2,23 @@
 # This file is distributed under the GPL-2.0-or-later.
 msgid ""
 msgstr ""
-"Project-Id-Version: INITE Agents 0.4.0\n"
+"Project-Id-Version: INITE Agents 0.7.0\n"
 "Report-Msgid-Bugs-To: https://inite.ai/en/contact\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-10-22T20:44:00+00:00\n"
+"POT-Creation-Date: 2026-10-23T04:16:02+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: inite-agents\n"
 
 #. Plugin Name of the plugin
 #: inite-agents.php
-#: includes/class-inite-agents-admin.php:30
-#: includes/class-inite-agents-admin.php:94
+#: includes/class-inite-agents-admin-overview.php:38
+#: includes/class-inite-agents-admin.php:33
+#: includes/class-inite-agents-admin.php:121
 msgid "INITE Agents"
 msgstr ""
 
@@ -29,7 +30,7 @@ msgstr ""
 
 #. Description of the plugin
 #: inite-agents.php
-msgid "Serves the facts your business confirmed in INITE to AI agents: llms.txt, the agent card and MCP files under /.well-known, a Content-Signal line in robots.txt, the head tags, and read-only abilities for the WordPress MCP Adapter."
+msgid "Serves the facts your business confirmed in INITE to AI agents (llms.txt, the agent card and MCP files, robots.txt signals, head tags, JSON-LD, abilities for the MCP Adapter) and shows in WordPress what agents and assistants do with your site."
 msgstr ""
 
 #. Author of the plugin
@@ -98,6 +99,530 @@ msgstr ""
 msgid "Unknown ability."
 msgstr ""
 
+#: includes/class-inite-agents-admin-fixes.php:25
+msgid "Preview"
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:62
+msgid "The fixes use the facts your business confirmed in INITE. Add the site key first."
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:62
+#: includes/class-inite-agents-admin-overview.php:135
+#: includes/class-inite-agents-admin-overview.php:187
+msgid "Add the site key"
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:65
+msgid "Each fix adds one thing the analysis looks for, built from your confirmed facts. Open \"Preview\" to see exactly what it adds. Nothing is added while a fix is off, and nothing another plugin already prints is printed twice."
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:69
+msgid "Structured data (JSON-LD) on the front page"
+msgstr ""
+
+#. translators: %s: SEO plugin name.
+#: includes/class-inite-agents-admin-fixes.php:73
+#, php-format
+msgid "%s is active: what you switch on here goes into its schema graph. A value it already has is kept; only what it lacks is added, and a type it already prints is not added twice."
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:78
+#: includes/class-inite-agents-admin.php:207
+msgid "robots.txt"
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:81
+msgid "Front page"
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:84
+msgid "Save fixes"
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:100
+msgid "Nothing to add yet: the stored copy has no business node. Test the connection in Settings."
+msgstr ""
+
+#. translators: %s: SEO plugin name.
+#: includes/class-inite-agents-admin-fixes.php:104
+#, php-format
+msgid "Left out: %s already prints an Organization."
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:108
+msgid "Business"
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:108
+msgid "Organization or LocalBusiness: name, description, address, opening hours, phone, email and services"
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:112
+msgid "Nothing to add: your confirmed facts have no questions and answers."
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:114
+msgid "Left out of a page that has an SEO plugin's FAQ block, which prints its own."
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:116
+msgid "Questions"
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:116
+msgid "FAQPage from the questions and answers you confirmed"
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:120
+msgid "Nothing to add: no confirmed service is sold per item with a price. Services stay in the business node as offers."
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:124
+msgid "Products"
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:124
+msgid "A Product with its price for each confirmed service sold per item"
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:135
+msgid "A robots.txt file exists on the server, so WordPress does not generate one and this fix cannot add to it. Paste the preview into that file instead."
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:138
+msgid "Block crawlers that collect pages to train AI models"
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:139
+msgid "Block AI search crawlers"
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:139
+msgid "Assistants then cannot find and cite your pages."
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:140
+msgid "Block assistants opening a page for a person who asked"
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:140
+msgid "Assistants then cannot read your page when someone asks about you."
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:142
+msgid "Which AI crawlers to block"
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:148
+msgid "Recommended: block training only, and let search and answers in. An agent another plugin already names in robots.txt is left to it."
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:149
+msgid "Nothing to add with these choices."
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:150
+msgid "AI crawlers"
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:150
+msgid "Tell AI crawlers in robots.txt what they may do"
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:155
+msgid "No sitemap found: WordPress's own sitemap is switched off and no SEO plugin provides one."
+msgstr ""
+
+#. translators: %s: sitemap address.
+#: includes/class-inite-agents-admin-fixes.php:158
+#, php-format
+msgid "Check passed: robots.txt already names a sitemap. Yours is %s."
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:160
+msgid "Check failed: robots.txt does not name your sitemap, so a crawler has to guess where it is."
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:162
+msgid "Sitemap link"
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:162
+msgid "Name the sitemap in robots.txt"
+msgstr ""
+
+#. translators: %s: SEO plugin name.
+#: includes/class-inite-agents-admin-fixes.php:171
+#, php-format
+msgid "Not needed: %s writes the meta description. Set it there."
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:173
+msgid "Nothing to add: there is no confirmed description and no tagline."
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:175
+msgid "From the one-line description you confirmed in INITE. If your theme already prints a meta description, leave this off."
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:177
+msgid "Meta description"
+msgstr ""
+
+#: includes/class-inite-agents-admin-fixes.php:177
+msgid "Add a meta description to the front page"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:45
+#: includes/class-inite-agents-admin.php:63
+#: includes/class-inite-agents-requests.php:61
+msgid "You are not allowed to do this."
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:90
+msgid "Organization schema on the front page"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:91
+msgid "LocalBusiness schema on the front page"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:92
+msgid "FAQPage schema"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:93
+msgid "Product schema"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:94
+msgid "Meta description on the front page"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:95
+msgid "A2A agent card at /.well-known/agent-card.json"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:96
+msgid "MCP server card at /.well-known/mcp.json"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:97
+msgid "API catalog at /.well-known/api-catalog"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:98
+msgid "Content Signals in robots.txt"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:135
+#: includes/class-inite-agents-admin-overview.php:187
+msgid "Connect the site with its INITE site key to see what AI agents and assistants do with it."
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:141
+msgid "The summary arrives with the next hourly sync."
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:141
+msgid "Open the overview"
+msgstr ""
+
+#. translators: %d: score out of 100.
+#: includes/class-inite-agents-admin-overview.php:154
+#, php-format
+msgid "AI visibility: %d of 100."
+msgstr ""
+
+#. translators: %d: number of checks.
+#: includes/class-inite-agents-admin-overview.php:157
+#, php-format
+msgid "%d failed check can be fixed here."
+msgid_plural "%d failed checks can be fixed here."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-inite-agents-admin-overview.php:161
+msgid "No analysis of this domain yet."
+msgstr ""
+
+#. translators: %s: number of reads.
+#: includes/class-inite-agents-admin-overview.php:164
+#, php-format
+msgid "AI agents read your agent files %s times in 30 days."
+msgstr ""
+
+#. translators: %s: number of visits.
+#: includes/class-inite-agents-admin-overview.php:166
+#, php-format
+msgid "People from AI assistants: %s in 30 days."
+msgstr ""
+
+#. translators: %s: number of suggestions.
+#: includes/class-inite-agents-admin-overview.php:171
+#, php-format
+msgid "%s suggestion from your site waits in INITE."
+msgid_plural "%s suggestions from your site wait in INITE."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: number of articles.
+#: includes/class-inite-agents-admin-overview.php:175
+#, php-format
+msgid "%s article waits for your approval in INITE."
+msgid_plural "%s articles wait for your approval in INITE."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-inite-agents-admin-overview.php:181
+#: includes/class-inite-agents-admin.php:117
+msgid "Overview"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:181
+msgid "INITE cabinet"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:181
+#: includes/class-inite-agents-admin-overview.php:226
+msgid "(opens in a new tab)"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:193
+msgid "Showing the last summary received."
+msgstr ""
+
+#. translators: %s: date and time.
+#: includes/class-inite-agents-admin-overview.php:198
+#, php-format
+msgid "From INITE, %s."
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:202
+msgid "Refresh"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:211
+msgid "INITE shows its thirty-day breakdowns by agent, page and assistant with Atlas Premium; here they are totals. The counts this plugin keeps itself are shown in full."
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:240
+msgid "others"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:268
+msgid "AI visibility"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:268
+msgid "Open the full report in INITE"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:268
+msgid "Analyze the site in INITE"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:270
+msgid "No analysis of this domain yet. Once one runs, its score and the checks it failed appear here."
+msgstr ""
+
+#. translators: 1: score out of 100, 2: date.
+#: includes/class-inite-agents-admin-overview.php:275
+#, php-format
+msgid "%1$s of 100, analysis of %2$s."
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:278
+msgid "The analysis found nothing here that the site can fix by itself."
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:281
+msgid "Failed check"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:281
+msgid "What to do"
+msgstr ""
+
+#. translators: %s: SEO plugin name.
+#: includes/class-inite-agents-admin-overview.php:290
+#, php-format
+msgid "%s writes it: set it there."
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:292
+msgid "Done in the INITE cabinet."
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:294
+msgid "On here. The next analysis will see it."
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:296
+msgid "Switch on the fix"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:296
+msgid "Switch on the feature"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:310
+msgid "What assistants say about you"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:310
+msgid "Compare in the INITE cabinet"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:312
+msgid "Not checked yet. INITE asks AI assistants about your business and compares the answers with your confirmed facts; the result appears here."
+msgstr ""
+
+#. translators: 1: answers that match, 2: answers that differ.
+#: includes/class-inite-agents-admin-overview.php:316
+#, php-format
+msgid "%1$s answers match your facts, %2$s differ."
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:320
+msgid "What you do"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:321
+msgid "Weekday opening"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:322
+msgid "Sunday"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:323
+msgid "Price"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:324
+msgid "Address"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:325
+msgid "Phone"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:327
+#: includes/class-inite-agents-admin-overview.php:382
+msgid "Assistant"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:327
+msgid "Fact"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:327
+msgid "Your facts"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:327
+msgid "It said"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:331
+msgid "something else (open the cabinet for the details)"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:343
+msgid "AI agents reading your site"
+msgstr ""
+
+#. translators: %s: link to the settings.
+#: includes/class-inite-agents-admin-overview.php:345
+#, php-format
+msgid "The plugin counts agent reads while the daily report is on. %s"
+msgstr ""
+
+#. translators: %s: link to the settings.
+#: includes/class-inite-agents-admin-overview.php:345
+#: includes/class-inite-agents-admin.php:43
+#: includes/class-inite-agents-admin.php:119
+msgid "Settings"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:354
+msgid "Counted on this site in the last 7 days:"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:355
+msgid "Agent and path"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:355
+#: includes/class-inite-agents-admin-overview.php:361
+msgid "Reads"
+msgstr ""
+
+#. translators: 1: reads, 2: MCP calls.
+#: includes/class-inite-agents-admin-overview.php:358
+#, php-format
+msgid "INITE, last 30 days: %1$s reads of your agent files, %2$s calls to your MCP server."
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:361
+msgid "Agent"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:371
+msgid "People from AI assistants"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:373
+msgid "Off. With the daily report on, the plugin counts visits that come from ChatGPT, Perplexity, Gemini, Copilot, Claude and other assistants: per day and page, no address and no cookie."
+msgstr ""
+
+#. translators: %s: number of visits.
+#: includes/class-inite-agents-admin-overview.php:378
+#, php-format
+msgid "%s visits in the last 30 days, counted on this site. Pages served from a full-page cache are not counted, so this is a floor."
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:382
+#: includes/class-inite-agents-admin-overview.php:384
+msgid "Visits"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:384
+msgid "Page"
+msgstr ""
+
+#: includes/class-inite-agents-admin-overview.php:396
+msgid "Waiting for you"
+msgstr ""
+
+#. translators: %s: number.
+#: includes/class-inite-agents-admin-overview.php:401
+#, php-format
+msgid "%s suggestion read from your site: a value your facts do not say yet."
+msgid_plural "%s suggestions read from your site: values your facts do not say yet."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: number.
+#: includes/class-inite-agents-admin-overview.php:401
+msgid "Review in INITE"
+msgstr ""
+
+#. translators: %s: number.
+#: includes/class-inite-agents-admin-overview.php:403
+#, php-format
+msgid "%s article drafted and waiting for your approval."
+msgid_plural "%s articles drafted and waiting for your approval."
+msgstr[0] ""
+msgstr[1] ""
+
+#. translators: %s: number.
+#: includes/class-inite-agents-admin-overview.php:403
+msgid "Read and approve in INITE"
+msgstr ""
+
 #: includes/class-inite-agents-admin-status.php:47
 msgid "WordPress is installed in a subdirectory, so it never sees requests to the domain root. Upload the files to the root instead, or ask INITE for the agents subdomain."
 msgstr ""
@@ -134,195 +659,189 @@ msgstr ""
 msgid "Adds %s to the \"User-agent: *\" group."
 msgstr ""
 
-#. translators: %s: SEO plugin name.
-#: includes/class-inite-agents-admin-status.php:98
+#. translators: %s: link to the Fixes tab.
+#: includes/class-inite-agents-admin-status.php:95
 #, php-format
-msgid "The Organization schema is left out of the JSON-LD: %s already prints one."
+msgid "The JSON-LD of your facts is switched in %s, type by type."
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:100
-msgid "The JSON-LD goes on the front page only. FAQPage is left out of a page that has an SEO plugin's FAQ block."
+#. translators: %s: link to the Fixes tab.
+#: includes/class-inite-agents-admin-status.php:95
+#: includes/class-inite-agents-admin.php:118
+msgid "Fixes"
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:111
+#: includes/class-inite-agents-admin-status.php:105
 msgid "Needs WordPress 6.9 or later, which has the Abilities API."
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:114
+#: includes/class-inite-agents-admin-status.php:108
 msgid "Install and activate the MCP Adapter plugin so agents can reach them over MCP."
 msgstr ""
 
 #. translators: %s: MCP endpoint URL.
-#: includes/class-inite-agents-admin-status.php:117
+#: includes/class-inite-agents-admin-status.php:111
 #, php-format
 msgid "The MCP Adapter lists them on its default server: %s"
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:127
-msgid "Off: nothing is sent, and agent reads are not counted."
+#: includes/class-inite-agents-admin-status.php:121
+msgid "Off: nothing is sent, and neither agent reads nor visits from assistants are counted."
 msgstr ""
 
 #. translators: %d: number of reads.
-#: includes/class-inite-agents-admin-status.php:134
+#: includes/class-inite-agents-admin-status.php:128
 #, php-format
 msgid "AI agents read the served paths %d time in the last 7 days."
 msgid_plural "AI agents read the served paths %d times in the last 7 days."
 msgstr[0] ""
 msgstr[1] ""
 
-#: includes/class-inite-agents-admin-status.php:144
+#: includes/class-inite-agents-admin-status.php:138
 msgid "Off: no post is made. The articles you approve wait in your INITE cabinet."
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:146
+#: includes/class-inite-agents-admin-status.php:140
 msgid "The articles you approve in the INITE cabinet become posts at the next hourly sync, as \"New articles\" below says."
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:159
+#: includes/class-inite-agents-admin-status.php:153
 msgid "Last check"
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:159
+#: includes/class-inite-agents-admin-status.php:153
 msgid "OK"
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:164
+#: includes/class-inite-agents-admin-status.php:158
 msgid "Site"
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:165
+#: includes/class-inite-agents-admin-status.php:159
 msgid "Facts version"
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:165
+#: includes/class-inite-agents-admin-status.php:159
 msgid "confirmed"
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:166
+#: includes/class-inite-agents-admin-status.php:160
 msgid "Last sync"
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:167
+#: includes/class-inite-agents-admin-status.php:161
 msgid "Files"
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:171
+#: includes/class-inite-agents-admin-status.php:165
 msgid "MCP server"
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:174
+#: includes/class-inite-agents-admin-status.php:168
 msgid "Stored copy"
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:174
+#: includes/class-inite-agents-admin-status.php:168
 msgid "none: nothing is served"
 msgstr ""
 
-#: includes/class-inite-agents-admin-status.php:190
+#: includes/class-inite-agents-admin-status.php:184
 msgid "never"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:40
-msgid "Settings"
+#: includes/class-inite-agents-admin.php:123
+msgid "INITE Agents sections"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:60
-msgid "You are not allowed to do this."
-msgstr ""
-
-#: includes/class-inite-agents-admin.php:98
+#: includes/class-inite-agents-admin.php:147
 msgid "Connected. The files below are the copy now stored."
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:102
+#: includes/class-inite-agents-admin.php:151
 msgid "Serves the facts your business confirmed in INITE to AI agents, from a copy stored on this site. Make the site key in the \"For agents\" tab of your INITE cabinet."
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:102
+#: includes/class-inite-agents-admin.php:151
 msgid "Open the INITE cabinet"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:106
+#: includes/class-inite-agents-admin.php:155
 msgid "Site key"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:112
+#: includes/class-inite-agents-admin.php:161
 msgid "A key is saved. Leave the field empty to keep it."
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:112
+#: includes/class-inite-agents-admin.php:161
 msgid "Paste the key the cabinet showed you once."
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:114
+#: includes/class-inite-agents-admin.php:163
 msgid "Remove the key and stop serving"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:130
+#: includes/class-inite-agents-admin.php:179
 msgid "New articles"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:133
+#: includes/class-inite-agents-admin.php:182
 msgid "Save as drafts: I press Publish in WordPress"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:135
+#: includes/class-inite-agents-admin.php:184
 msgid "Publish at once"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:141
+#: includes/class-inite-agents-admin.php:190
 msgid "Connection"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:146
+#: includes/class-inite-agents-admin.php:195
 msgid "Test connection"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:157
+#: includes/class-inite-agents-admin.php:206
 msgid "Root files"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:157
+#: includes/class-inite-agents-admin.php:206
 msgid "Serve /llms.txt, /.well-known/agent-card.json, /.well-known/mcp.json and /.well-known/api-catalog"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:158
-msgid "robots.txt"
-msgstr ""
-
-#: includes/class-inite-agents-admin.php:158
+#: includes/class-inite-agents-admin.php:207
 msgid "Add the Content-Signal line to robots.txt"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:159
+#: includes/class-inite-agents-admin.php:208
 msgid "Page head"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:159
-msgid "Add the WebMCP script, the links to the files and the JSON-LD"
+#: includes/class-inite-agents-admin.php:208
+msgid "Add the WebMCP script and the links to the files"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:160
+#: includes/class-inite-agents-admin.php:209
 msgid "Abilities for the MCP Adapter"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:160
+#: includes/class-inite-agents-admin.php:209
 msgid "Register five read-only abilities agents can call through the WordPress MCP Adapter"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:161
+#: includes/class-inite-agents-admin.php:210
 msgid "Daily report"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:161
-msgid "Send INITE the plugin version, the paths served and daily counts of AI agent reads (no visitor data)"
+#: includes/class-inite-agents-admin.php:210
+msgid "Count AI agent reads and visits from AI assistants, and send INITE the counts with the plugin version and the paths served (counts only: no address, no cookie)"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:162
+#: includes/class-inite-agents-admin.php:211
 msgid "Articles"
 msgstr ""
 
-#: includes/class-inite-agents-admin.php:162
+#: includes/class-inite-agents-admin.php:211
 msgid "Create posts from the articles you approved in the INITE cabinet, and tell INITE their addresses"
 msgstr ""
 
@@ -330,39 +849,8 @@ msgstr ""
 msgid "a file on the server"
 msgstr ""
 
-#: includes/class-inite-agents-settings.php:104
-msgid "That does not look like a site key. It starts with isk_ and is 36 characters long."
-msgstr ""
-
-#: includes/class-inite-agents-sync.php:44
-msgid "No site key is saved yet."
-msgstr ""
-
-#: includes/class-inite-agents-sync.php:56
-msgid "The service refused this site key."
-msgstr ""
-
-#. translators: %s: HTTP status code or network error.
-#: includes/class-inite-agents-sync.php:62
-#, php-format
-msgid "The INITE service did not answer (%s). The last good copy is still served."
-msgstr ""
-
-#: includes/class-inite-agents-sync.php:66
-msgid "The manifest did not read. The last good copy is still served."
-msgstr ""
-
-#. translators: %s: file name.
-#: includes/class-inite-agents-sync.php:84
-#, php-format
-msgid "The file %s did not arrive. The last good copy is still served."
-msgstr ""
-
-#: includes/class-inite-agents-sync.php:96
-msgid "The public facts did not arrive. The last good copy is still served."
-msgstr ""
-
-#: includes/class-inite-agents-requests.php:48 includes/class-inite-agents-requests.php:149
+#: includes/class-inite-agents-requests.php:48
+#: includes/class-inite-agents-requests.php:149
 msgid "Requests from agents"
 msgstr ""
 
@@ -414,7 +902,8 @@ msgstr ""
 msgid "Person"
 msgstr ""
 
-#: includes/class-inite-agents-requests.php:177 includes/class-inite-agents-requests.php:200
+#: includes/class-inite-agents-requests.php:177
+#: includes/class-inite-agents-requests.php:200
 msgid "Request"
 msgstr ""
 
@@ -462,4 +951,42 @@ msgstr ""
 
 #: includes/class-inite-agents-requests.php:250
 msgid "INITE keeps each request for 180 days, then deletes it. Choose where requests go in the \"For agents\" tab of your INITE cabinet."
+msgstr ""
+
+#: includes/class-inite-agents-settings.php:149
+msgid "That does not look like a site key. It starts with isk_ and is 36 characters long."
+msgstr ""
+
+#. translators: %s: HTTP status code or network error.
+#: includes/class-inite-agents-summary.php:90
+#, php-format
+msgid "INITE did not answer (%s)."
+msgstr ""
+
+#: includes/class-inite-agents-sync.php:44
+msgid "No site key is saved yet."
+msgstr ""
+
+#: includes/class-inite-agents-sync.php:56
+msgid "The service refused this site key."
+msgstr ""
+
+#. translators: %s: HTTP status code or network error.
+#: includes/class-inite-agents-sync.php:62
+#, php-format
+msgid "The INITE service did not answer (%s). The last good copy is still served."
+msgstr ""
+
+#: includes/class-inite-agents-sync.php:66
+msgid "The manifest did not read. The last good copy is still served."
+msgstr ""
+
+#. translators: %s: file name.
+#: includes/class-inite-agents-sync.php:84
+#, php-format
+msgid "The file %s did not arrive. The last good copy is still served."
+msgstr ""
+
+#: includes/class-inite-agents-sync.php:96
+msgid "The public facts did not arrive. The last good copy is still served."
 msgstr ""

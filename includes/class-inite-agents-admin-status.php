@@ -91,14 +91,8 @@ final class Inite_Agents_Admin_Status {
 	 * @return string[]
 	 */
 	private static function lines_head() {
-		$lines = array();
-		$org   = Inite_Agents_Conflicts::organization_schema();
-		if ( '' !== $org ) {
-			/* translators: %s: SEO plugin name. */
-			$lines[] = sprintf( esc_html__( 'The Organization schema is left out of the JSON-LD: %s already prints one.', 'inite-agents' ), esc_html( $org ) );
-		}
-		$lines[] = esc_html__( 'The JSON-LD goes on the front page only. FAQPage is left out of a page that has an SEO plugin\'s FAQ block.', 'inite-agents' );
-		return $lines;
+		/* translators: %s: link to the Fixes tab. */
+		return array( sprintf( esc_html__( 'The JSON-LD of your facts is switched in %s, type by type.', 'inite-agents' ), '<a href="' . esc_url( Inite_Agents_Admin::url( 'fixes' ) ) . '">' . esc_html__( 'Fixes', 'inite-agents' ) . '</a>' ) );
 	}
 
 	/**
@@ -124,7 +118,7 @@ final class Inite_Agents_Admin_Status {
 	 */
 	private static function lines_ping() {
 		if ( ! Inite_Agents_Settings::on( 'ping' ) ) {
-			return array( esc_html__( 'Off: nothing is sent, and agent reads are not counted.', 'inite-agents' ) );
+			return array( esc_html__( 'Off: nothing is sent, and neither agent reads nor visits from assistants are counted.', 'inite-agents' ) );
 		}
 		$total = 0;
 		foreach ( Inite_Agents_Visitors::rows() as $row ) {

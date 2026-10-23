@@ -30,6 +30,16 @@ final class Inite_Agents_Settings {
 	const OFF_BY_DEFAULT = array( 'ping', 'content' );
 
 	/**
+	 * The one-click fixes (Inite_Agents_Fixes). The two JSON-LD types the
+	 * page head printed before 0.7.0 start as the "Page head" switch was, so
+	 * an update changes nothing; every other fix is off until switched on.
+	 */
+	const FIXES = array( 'schema_business', 'schema_faq', 'schema_products', 'robots_policy', 'meta_description', 'sitemap_line' );
+
+	/** What the robots.txt policy blocks: training crawlers by default, search and answer fetchers only on request. */
+	const ROBOTS_BLOCK = array( 'training', 'search', 'answer' );
+
+	/**
 	 * Cached settings for this request.
 	 *
 	 * @var array|null
@@ -39,7 +49,7 @@ final class Inite_Agents_Settings {
 	/**
 	 * The settings with defaults filled in.
 	 *
-	 * @return array{key:string,features:array<string,bool>}
+	 * @return array{key:string,features:array<string,bool>,content_status:string,fixes:array<string,bool>,robots_block:array<string,bool>}
 	 */
 	public static function get() {
 		if ( null !== self::$cache ) {
@@ -51,10 +61,21 @@ final class Inite_Agents_Settings {
 		foreach ( self::FEATURES as $feature ) {
 			$features[ $feature ] = isset( $raw['features'][ $feature ] ) ? (bool) $raw['features'][ $feature ] : ! in_array( $feature, self::OFF_BY_DEFAULT, true );
 		}
+		$fixes = array();
+		foreach ( self::FIXES as $fix ) {
+			$was           = in_array( $fix, array( 'schema_business', 'schema_faq' ), true ) ? $features['head'] : false;
+			$fixes[ $fix ] = isset( $raw['fixes'][ $fix ] ) ? (bool) $raw['fixes'][ $fix ] : $was;
+		}
+		$block = array();
+		foreach ( self::ROBOTS_BLOCK as $group ) {
+			$block[ $group ] = isset( $raw['robots_block'][ $group ] ) ? (bool) $raw['robots_block'][ $group ] : 'training' === $group;
+		}
 		self::$cache = array(
-			'key'      => isset( $raw['key'] ) && is_string( $raw['key'] ) ? $raw['key'] : '',
+			'key'            => isset( $raw['key'] ) && is_string( $raw['key'] ) ? $raw['key'] : '',
 			'features'       => $features,
 			'content_status' => isset( $raw['content_status'] ) && 'publish' === $raw['content_status'] ? 'publish' : 'draft',
+			'fixes'          => $fixes,
+			'robots_block'   => $block,
 		);
 		return self::$cache;
 	}
@@ -76,6 +97,17 @@ final class Inite_Agents_Settings {
 	}
 
 	/**
+	 * Whether a fix is on: a key is saved and the owner switched it on.
+	 *
+	 * @param string $fix One of FIXES.
+	 * @return bool
+	 */
+	public static function fix( $fix ) {
+		$s = self::get();
+		return '' !== $s['key'] && ! empty( $s['fixes'][ $fix ] );
+	}
+
+	/**
 	 * The site key's shape, as the service issues it.
 	 *
 	 * @param string $key Candidate key.
@@ -94,6 +126,19 @@ final class Inite_Agents_Settings {
 	public static function sanitize( $input ) {
 		$old   = self::get();
 		$input = is_array( $input ) ? $input : array();
+		// The Fixes tab posts only the fixes: everything else stays as it was.
+		if ( isset( $input['_tab'] ) && 'fixes' === $input['_tab'] ) {
+			$fixes = array();
+			foreach ( self::FIXES as $fix ) {
+				$fixes[ $fix ] = ! empty( $input['fixes'][ $fix ] );
+			}
+			$block = array();
+			foreach ( self::ROBOTS_BLOCK as $group ) {
+				$block[ $group ] = ! empty( $input['robots_block'][ $group ] );
+			}
+			self::flush();
+			return array_merge( $old, array( 'fixes' => $fixes, 'robots_block' => $block ) );
+		}
 		$typed = isset( $input['key'] ) ? trim( sanitize_text_field( wp_unslash( $input['key'] ) ) ) : '';
 		// The field is left empty to keep the saved key: the key is never printed back into the page.
 		$key = '' === $typed ? $old['key'] : $typed;
@@ -113,6 +158,8 @@ final class Inite_Agents_Settings {
 			'key'            => $key,
 			'features'       => $features,
 			'content_status' => isset( $input['content_status'] ) && 'publish' === $input['content_status'] ? 'publish' : 'draft',
+			'fixes'          => $old['fixes'],
+			'robots_block'   => $old['robots_block'],
 		);
 	}
 

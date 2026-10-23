@@ -1,8 +1,10 @@
 <?php
 /**
  * The daily ping: which plugin and WordPress versions run, which paths the
- * plugin serves, and how many times each known AI agent read them per day.
- * No address, no user agent string, no visitor data (readme.txt,
+ * plugin serves, how many times each known AI agent read them per day, and
+ * how many visits came from AI assistants per day and page
+ * (Inite_Agents_Referrals). No address, no user agent string, no visitor
+ * data (readme.txt,
  * "External services").
  *
  * @package Inite_Agents
@@ -44,6 +46,7 @@ final class Inite_Agents_Ping {
 			'wpVersion'     => get_bloginfo( 'version' ),
 			'paths'         => self::paths(),
 			'visits'        => Inite_Agents_Visitors::rows(),
+			'referrals'     => Inite_Agents_Referrals::rows(),
 		);
 	}
 
