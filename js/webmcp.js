@@ -7,6 +7,8 @@
  * The plugin prints one setting before it, initeAgentsWebmcp.facts: the
  * address of the business's public facts at inite.ai. The script reads that
  * JSON once, without cookies, and only when an agent calls one of its tools.
+ * While the owner takes requests from agents it also names where
+ * request_contact and request_booking post them (initeAgentsWebmcp.requests).
  */
 (function () {
 const WEEK = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
@@ -67,6 +69,25 @@ return `${p.amount} ${p.currency} per ${p.unit}`;
 }
 const QUERY = { type: 'object', properties: { query: { type: 'string', description: 'Words to look for; leave out for all.' } }, additionalProperties: false };
 const NONE = { type: 'object', properties: {}, additionalProperties: false };
+const STR = { type: 'string' };
+const CONTACT = { type: 'object', description: 'Email, or phone with country code.', properties: { email: STR, phone: STR } };
+const AGREED = { type: 'boolean', const: true, description: 'true only once your user agreed to what is sent.' };
+const NOTHING_CONFIRMED = 'The business replies to the person itself; this tool confirms nothing. Ask your user first.';
+function requestSpecs(booking) {
+const contact = {
+name: 'request_contact',
+description: `Sends this business a request to contact a person: name, contact, what they need. ${NOTHING_CONFIRMED}`,
+inputSchema: { type: 'object', properties: { name: STR, contact: CONTACT, message: STR, service: STR, preferred_time: STR, user_confirmed: AGREED }, required: ['name', 'contact', 'message', 'user_confirmed'] },
+};
+if (!booking)
+return [contact];
+const window = { type: 'object', properties: { date: STR, from: STR, to: STR }, required: ['date'] };
+return [contact, {
+name: 'request_booking',
+description: `Sends this business a booking request: service, preferred windows (date YYYY-MM-DD, from/to HH:MM, its time zone), party size, contact. No booking until it replies. ${NOTHING_CONFIRMED}`,
+inputSchema: { type: 'object', properties: { service: STR, preferred_windows: { type: 'array', items: window }, preferred_time: STR, party_size: { type: 'integer' }, name: STR, contact: CONTACT, message: STR, user_confirmed: AGREED }, required: ['name', 'contact', 'user_confirmed'] },
+}];
+}
 function installSiteTools(cfg, g) {
 try {
 const host = findHost(g);
@@ -121,6 +142,29 @@ answer: (f, a) => f.faq.filter((x) => matches(a.query, x.q, x.a)),
 },
 ];
 let handed = 0;
+if (typeof cfg.requests === 'string' && /^https:\/\//.test(cfg.requests)) {
+const url = cfg.requests;
+for (const t of requestSpecs(cfg.booking === true)) {
+try {
+const got = host.registerTool({
+name: t.name,
+description: t.description,
+inputSchema: t.inputSchema,
+annotations: { readOnlyHint: false },
+// A POST without cookies; the answer (sent, or why not, and the checks) is the tool's result as it came.
+execute: (args) => fetcher(url, { method: 'POST', credentials: 'omit', mode: 'cors', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tool: t.name, arguments: args || {} }) })
+.then((r) => r.json())
+.then((j) => ({ content: [{ type: 'text', text: JSON.stringify(j) }] })),
+});
+if (got && typeof got.catch === 'function')
+got.catch(() => undefined); // quiet: a draft API that rejects is a browser we do not understand; the tool is absent
+handed++;
+}
+catch {
+// quiet: a host that refuses one tool keeps the others; nothing may throw into the client's page
+}
+}
+}
 for (const t of tools) {
 try {
 const got = host.registerTool({
@@ -147,5 +191,5 @@ return 0;
 }
 var g = typeof globalThis !== "undefined" ? globalThis : window;
 var cfg = g.initeAgentsWebmcp;
-if (cfg && typeof cfg.facts === "string" && /^https?:\/\//.test(cfg.facts)) installSiteTools({ facts: cfg.facts }, g);
+if (cfg && typeof cfg.facts === "string" && /^https?:\/\//.test(cfg.facts)) installSiteTools(typeof cfg.requests === "string" ? { facts: cfg.facts, requests: cfg.requests, booking: cfg.booking === true } : { facts: cfg.facts }, g);
 })();

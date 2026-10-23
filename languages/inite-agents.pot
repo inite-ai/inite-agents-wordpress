@@ -361,3 +361,105 @@ msgstr ""
 #: includes/class-inite-agents-sync.php:96
 msgid "The public facts did not arrive. The last good copy is still served."
 msgstr ""
+
+#: includes/class-inite-agents-requests.php:48 includes/class-inite-agents-requests.php:149
+msgid "Requests from agents"
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:49
+msgid "Agent requests"
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:86
+msgid "No site key is saved."
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:92
+msgid "INITE did not answer. Try again in a moment."
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:150
+msgid "AI agents sent these requests to your business for the people they help, with their agreement. Reply to each person yourself: nothing was confirmed or booked for you."
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:152
+msgid "Saved."
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:154
+msgid "That did not go through. Try again."
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:162
+msgid "All"
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:163
+msgid "New"
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:164
+msgid "Answered"
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:165
+msgid "Spam"
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:177
+msgid "Received"
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:177
+msgid "Person"
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:177 includes/class-inite-agents-requests.php:200
+msgid "Request"
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:177
+msgid "Status"
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:182
+msgid "No requests yet."
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:200
+msgid "Booking request"
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:203
+msgid "Service:"
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:207
+msgid "When:"
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:211
+msgid "People:"
+msgstr ""
+
+#. translators: %s: the agent's product name
+#: includes/class-inite-agents-requests.php:217
+#, php-format
+msgid "Sent by %s"
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:230
+msgid "Mark answered"
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:231
+msgid "Mark spam"
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:232
+msgid "Mark new"
+msgstr ""
+
+#: includes/class-inite-agents-requests.php:250
+msgid "INITE keeps each request for 180 days, then deletes it. Choose where requests go in the \"For agents\" tab of your INITE cabinet."
+msgstr ""

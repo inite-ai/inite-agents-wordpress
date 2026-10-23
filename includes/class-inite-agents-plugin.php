@@ -30,6 +30,7 @@ final class Inite_Agents_Plugin {
 		Inite_Agents_Content::register();
 		if ( is_admin() ) {
 			Inite_Agents_Admin::register();
+			Inite_Agents_Requests::register();
 		}
 		// Hooked everywhere: WordPress checks for updates from cron as well as from the admin.
 		if ( class_exists( 'Inite_Agents_Updater' ) ) {

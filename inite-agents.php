@@ -40,6 +40,7 @@ require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-basics.php';
 require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-content.php';
 require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-admin-status.php';
 require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-admin.php';
+require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-requests.php';
 require_once INITE_AGENTS_DIR . 'includes/class-inite-agents-plugin.php';
 // The copy from inite.ai updates itself from there; the WordPress.org build has no such file.
 if ( file_exists( INITE_AGENTS_DIR . 'includes/class-inite-agents-updater.php' ) ) {

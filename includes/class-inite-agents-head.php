@@ -52,6 +52,26 @@ final class Inite_Agents_Head {
 	}
 
 	/**
+	 * The script's one setting: the facts address and, while the owner takes
+	 * requests from agents, where request_contact (and request_booking) post.
+	 * Both addresses are on inite.ai, as the manifest names them.
+	 *
+	 * @param array  $copy  The stored copy.
+	 * @param string $facts The facts address.
+	 * @return array
+	 */
+	private static function settings( $copy, $facts ) {
+		$out = array( 'facts' => $facts );
+		$req = isset( $copy['manifest']['features']['requests'] ) && is_array( $copy['manifest']['features']['requests'] ) ? $copy['manifest']['features']['requests'] : array();
+		$url = isset( $req['url'] ) && is_string( $req['url'] ) ? $req['url'] : '';
+		if ( ! empty( $req['enabled'] ) && 0 === strpos( $url, Inite_Agents_Settings::api_base() . '/api/site/v1/public/' ) ) {
+			$out['requests'] = $url;
+			$out['booking']  = ! empty( $req['booking'] );
+		}
+		return $out;
+	}
+
+	/**
 	 * Enqueue the WebMCP script. It ships inside the plugin (js/webmcp.js,
 	 * built from the same source as the script inite.ai serves to other
 	 * sites), so no code is loaded from another host; the one setting printed
@@ -76,7 +96,7 @@ final class Inite_Agents_Head {
 		);
 		wp_add_inline_script(
 			self::HANDLE,
-			'var initeAgentsWebmcp = ' . wp_json_encode( array( 'facts' => $facts ), JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP ) . ';',
+			'var initeAgentsWebmcp = ' . wp_json_encode( self::settings( $copy, $facts ), JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP ) . ';',
 			'before'
 		);
 	}
