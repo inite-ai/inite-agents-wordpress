@@ -39,8 +39,12 @@ final class Inite_Agents_Plugin {
 
 	/** The hourly sync. */
 	public static function cron_sync() {
-		Inite_Agents_Sync::run( false );
+		$synced = Inite_Agents_Sync::run( false );
 		Inite_Agents_Content::run();
+		// The site's basics only to a service that took the key: a refused one has nothing to read them for.
+		if ( ! empty( $synced['ok'] ) ) {
+			Inite_Agents_Basics::run();
+		}
 	}
 
 	/** Settings saved: sync at once and keep the clock running. */

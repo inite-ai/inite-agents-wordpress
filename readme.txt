@@ -4,7 +4,7 @@ Tags: ai, llms.txt, mcp, agents, schema
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.4.0
+Stable tag: 0.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -51,6 +51,10 @@ For the MCP abilities, also install and activate the MCP Adapter plugin (WordPre
 
 Yes. The facts are confirmed in the INITE cabinet, and the site key comes from there.
 
+= Does INITE read my site? =
+
+Yes, from its own servers, not through the plugin: once a day, up to eight public pages (the homepage and the pages about prices, services, contact, hours, FAQ or menu), obeying your robots.txt. What it finds that your facts do not say appears in the INITE cabinet as a suggestion to accept or ignore. Nothing changes in your published facts unless you confirm it, or turn on "Keep in step with my site" in the cabinet for values your site states in its schema.org markup.
+
 = What happens if INITE is down? =
 
 Nothing visible. The site serves the copy it already stored, and tries again an hour later.
@@ -94,6 +98,7 @@ This plugin talks to INITE (https://inite.ai), the service where you confirm you
 What is sent, when, and where:
 
 * **Sync** (every hour, when the settings are saved, when "Test connection" is pressed, and on activation): a request to `https://inite.ai/api/site/v1/manifest` and `https://inite.ai/api/site/v1/files/{name}` with your site key, the ETag of the copy held, and a user agent naming the plugin and WordPress versions. A request to `https://inite.ai/api/site/v1/public/{slug}` for the public facts, without the key.
+* **Site basics** (with the hourly sync, only when they changed, and at most once a day otherwise): a request to `https://inite.ai/api/site/v1/ping` with your site key, the plugin version and a `site` field holding your site's title and tagline (Settings → General), its language and address, and, if WooCommerce is active, the number of published products. INITE uses them to suggest your business's name and description in your cabinet; nothing is published until you accept and confirm it. No user, no email address, nothing about visitors.
 * **Daily report** (once a day, only after you switch "Daily report" on; it is off by default): a request to `https://inite.ai/api/site/v1/ping` with your site key, the plugin and WordPress versions, the paths the plugin serves, and for each of the last seven days the number of times each known AI agent (such as GPTBot, ClaudeBot or PerplexityBot) read those paths. No IP address, no full user agent, no cookie, nothing about human visitors.
 * **In your visitors' browsers** (only while "Page head" is on): the WebMCP script is part of the plugin (`js/webmcp.js`) and is served from your own site; no code is loaded from INITE. Only when an agent in the browser calls one of its tools does the script read your public facts, a JSON document, from `https://inite.ai/api/site/v1/public/{slug}`, once per page, without cookies. Like any request to another site, it carries the visitor's IP address and browser user agent to INITE; INITE sets and reads no cookie on it. A page no agent works on makes no request to INITE.
 * **Articles** (only while "Articles" is on, on each sync): a request to `https://inite.ai/api/site/v1/content/queue` with your site key for the articles you approved, and, for each post made, a request to `https://inite.ai/api/site/v1/content/{id}/published` with the post's address, or to `https://inite.ai/api/site/v1/content/{id}/failed` with the reason it could not be made.
@@ -112,6 +117,9 @@ INITE privacy policy: https://inite.ai/en/privacy
 
 == Changelog ==
 
+= 0.5.0 =
+* The hourly sync also tells INITE your site's title, tagline, language and address, and with WooCommerce the number of published products, so the INITE cabinet can suggest them. Sent only when they change, and at most once a day otherwise. No personal data.
+
 = 0.4.0 =
 * The WebMCP script ships inside the plugin and is served from your site. Only the facts, a JSON document, are read from INITE, and only when an agent calls a tool.
 * The daily report is off until you switch it on. Sites that already switched it on keep it.
@@ -127,6 +135,9 @@ INITE privacy policy: https://inite.ai/en/privacy
 * First release: root files, robots.txt Content-Signal, head tags, abilities for the MCP Adapter, daily report.
 
 == Upgrade Notice ==
+
+= 0.5.0 =
+The sync sends your site's title, tagline, language and address (and the WooCommerce product count) so INITE can suggest them in your cabinet.
 
 = 0.4.0 =
 The WebMCP script is now served from your site, not from inite.ai. The daily report is off on new installs until you switch it on.
