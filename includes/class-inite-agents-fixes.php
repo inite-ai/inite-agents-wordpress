@@ -5,10 +5,12 @@
  * switch in Settings → INITE Agents → Fixes, off until the owner turns it on,
  * with a preview of exactly what it adds.
  *
- *   robots_policy     groups in the generated robots.txt that keep AI
- *                     training crawlers out (and, only if asked, AI search
- *                     and answer fetchers); an agent another plugin already
- *                     names in robots.txt is left to it;
+ *   robots_policy     groups in the generated robots.txt for the AI
+ *                     crawlers the owner chose to keep out: none by
+ *                     default (training crawlers, Google-Extended, AI
+ *                     search and answer fetchers are each ticked by hand);
+ *                     an agent another plugin already names in robots.txt
+ *                     is left to it;
  *   meta_description  a meta description on the front page from the
  *                     business's confirmed one-line description, only while
  *                     no SEO plugin is active (they write their own);
@@ -32,13 +34,16 @@ final class Inite_Agents_Fixes {
 
 	/**
 	 * AI crawlers by what they do with a page, as their operators document
-	 * them. Training: the page goes into a model. Search: an AI search index
+	 * them. Training: the page goes into a model. Google-Extended: Google's
+	 * token for Gemini, apart because blocking it takes the site out of the
+	 * Gemini app (AI Overviews do not read it). Search: an AI search index
 	 * that cites and links. Answer: fetched at once for a person's question.
 	 */
 	const BOTS = array(
-		'training' => array( 'GPTBot', 'ClaudeBot', 'anthropic-ai', 'Google-Extended', 'Applebot-Extended', 'CCBot', 'Meta-ExternalAgent', 'Bytespider', 'cohere-ai' ),
-		'search'   => array( 'OAI-SearchBot', 'Claude-SearchBot', 'PerplexityBot', 'DuckAssistBot', 'YouBot' ),
-		'answer'   => array( 'ChatGPT-User', 'Claude-User', 'Perplexity-User', 'MistralAI-User', 'Meta-ExternalFetcher' ),
+		'training'        => array( 'GPTBot', 'ClaudeBot', 'anthropic-ai', 'Applebot-Extended', 'CCBot', 'Meta-ExternalAgent', 'Bytespider', 'cohere-ai' ),
+		'google_extended' => array( 'Google-Extended' ),
+		'search'          => array( 'OAI-SearchBot', 'Claude-SearchBot', 'PerplexityBot', 'DuckAssistBot', 'YouBot' ),
+		'answer'          => array( 'ChatGPT-User', 'Claude-User', 'Perplexity-User', 'MistralAI-User', 'Meta-ExternalFetcher' ),
 	);
 
 	/** The longest meta description written, in characters. */

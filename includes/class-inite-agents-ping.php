@@ -47,6 +47,7 @@ final class Inite_Agents_Ping {
 			'paths'         => self::paths(),
 			'visits'        => Inite_Agents_Visitors::rows(),
 			'referrals'     => Inite_Agents_Referrals::rows(),
+			'survey'        => Inite_Agents_Settings::on( 'survey' ) ? Inite_Agents_Survey::rows() : array(),
 		);
 	}
 

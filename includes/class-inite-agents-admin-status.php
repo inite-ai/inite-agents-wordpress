@@ -141,6 +141,41 @@ final class Inite_Agents_Admin_Status {
 	}
 
 	/**
+	 * IndexNow.
+	 *
+	 * @return string[]
+	 */
+	private static function lines_indexnow() {
+		$other = Inite_Agents_Indexnow::other();
+		if ( '' !== $other ) {
+			/* translators: %s: plugin name. */
+			return array( esc_html( sprintf( __( '%s already sends IndexNow for this site, so this one stays quiet even when switched on.', 'inite-agents' ), $other ) ) );
+		}
+		if ( ! Inite_Agents_Settings::on( 'indexnow' ) ) {
+			return array( esc_html__( 'Off: search engines find changes at their next crawl.', 'inite-agents' ) );
+		}
+		$key = Inite_Agents_Indexnow::key();
+		/* translators: %s: key file address. */
+		return array( sprintf( esc_html__( 'The key is served at %s, as the engines check it. Addresses go a minute after a change, at most 100 a request and 500 a day.', 'inite-agents' ), '<a href="' . esc_url( home_url( '/' . $key . '.txt' ) ) . '" target="_blank" rel="noopener">' . esc_html( '/' . $key . '.txt' ) . '</a>' ) );
+	}
+
+	/**
+	 * How did you hear about us.
+	 *
+	 * @return string[]
+	 */
+	private static function lines_survey() {
+		if ( ! Inite_Agents_Settings::on( 'survey' ) ) {
+			return array( esc_html__( 'Off: the question is not shown anywhere.', 'inite-agents' ) );
+		}
+		$lines = array( esc_html__( 'Shown at the WooCommerce checkout when WooCommerce is active. In Contact Form 7, add the [inite_how_heard] tag to a form; in WPForms, give a dropdown the CSS class inite-how-heard and the answers as its choices; anywhere else, use the [inite_how_heard] shortcode.', 'inite-agents' ) );
+		if ( ! Inite_Agents_Settings::on( 'ping' ) ) {
+			$lines[] = esc_html__( 'The counts stay on this site until the daily report is on.', 'inite-agents' );
+		}
+		return $lines;
+	}
+
+	/**
 	 * The connection block.
 	 *
 	 * @param array $copy   Stored copy.

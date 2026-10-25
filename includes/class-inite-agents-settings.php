@@ -24,14 +24,16 @@ final class Inite_Agents_Settings {
 	const SENDS = array( 'send_basics', 'send_content', 'send_products', 'send_events', 'send_services', 'send_locations' );
 
 	/** The features the owner switches. None does anything until a key is saved. */
-	const FEATURES = array( 'files', 'robots', 'head', 'abilities', 'ping', 'content', 'send_basics', 'send_content', 'send_products', 'send_events', 'send_services', 'send_locations' );
+	const FEATURES = array( 'files', 'robots', 'head', 'abilities', 'ping', 'content', 'indexnow', 'survey', 'send_basics', 'send_content', 'send_products', 'send_events', 'send_services', 'send_locations' );
 
 	/**
 	 * Features that stay off until the owner switches them on: the daily
 	 * report sends INITE counts from this site, articles write into it, and
 	 * nothing about the site's own content leaves it until its switch is on.
+	 * IndexNow tells search engines about new addresses, and the survey asks
+	 * the site's visitors a question: both are the owner's choice.
 	 */
-	const OFF_BY_DEFAULT = array( 'ping', 'content', 'send_basics', 'send_content', 'send_products', 'send_events', 'send_services', 'send_locations' );
+	const OFF_BY_DEFAULT = array( 'ping', 'content', 'indexnow', 'survey', 'send_basics', 'send_content', 'send_products', 'send_events', 'send_services', 'send_locations' );
 
 	/**
 	 * The one-click fixes (Inite_Agents_Fixes). The two JSON-LD types the
@@ -40,8 +42,13 @@ final class Inite_Agents_Settings {
 	 */
 	const FIXES = array( 'schema_business', 'schema_faq', 'schema_products', 'robots_policy', 'meta_description', 'sitemap_line' );
 
-	/** What the robots.txt policy blocks: training crawlers by default, search and answer fetchers only on request. */
-	const ROBOTS_BLOCK = array( 'training', 'search', 'answer' );
+	/**
+	 * What the robots.txt policy may block, each only when the owner ticks it.
+	 * Nothing is blocked by default: assistants answer from search, from pages
+	 * they open, and from what they were trained on. Google-Extended is its
+	 * own choice, because blocking it takes the site out of the Gemini app.
+	 */
+	const ROBOTS_BLOCK = array( 'training', 'google_extended', 'search', 'answer' );
 
 	/**
 	 * Cached settings for this request.
@@ -72,7 +79,11 @@ final class Inite_Agents_Settings {
 		}
 		$block = array();
 		foreach ( self::ROBOTS_BLOCK as $group ) {
-			$block[ $group ] = isset( $raw['robots_block'][ $group ] ) ? (bool) $raw['robots_block'][ $group ] : 'training' === $group;
+			$block[ $group ] = isset( $raw['robots_block'][ $group ] ) ? (bool) $raw['robots_block'][ $group ] : false;
+		}
+		// Before 0.10.0 Google-Extended was one of the training crawlers: a site that blocked those keeps blocking it until the owner says otherwise.
+		if ( isset( $raw['robots_block']['training'] ) && ! isset( $raw['robots_block']['google_extended'] ) ) {
+			$block['google_extended'] = (bool) $raw['robots_block']['training'];
 		}
 		self::$cache = array(
 			'key'            => isset( $raw['key'] ) && is_string( $raw['key'] ) ? $raw['key'] : '',

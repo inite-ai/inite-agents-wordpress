@@ -210,6 +210,8 @@ final class Inite_Agents_Admin {
 			'abilities' => array( __( 'Abilities for the MCP Adapter', 'inite-agents' ), __( 'Register five read-only abilities agents can call through the WordPress MCP Adapter', 'inite-agents' ) ),
 			'ping'      => array( __( 'Daily report', 'inite-agents' ), __( 'Count AI agent reads and visits from AI assistants, and send INITE the counts with the plugin version and the paths served (counts only: no address, no cookie)', 'inite-agents' ) ),
 			'content'   => array( __( 'Articles', 'inite-agents' ), __( 'Create posts from the articles you approved in the INITE cabinet, and tell INITE their addresses', 'inite-agents' ) ),
+			'indexnow'  => array( __( 'IndexNow', 'inite-agents' ), __( 'Tell Bing, Yandex and the other engines that share IndexNow when a public page, post or product is published, changed or removed (Google does not use it)', 'inite-agents' ) ),
+			'survey'    => array( __( 'How did you hear about us', 'inite-agents' ), __( 'Ask customers an optional question with AI assistants among the answers, at the WooCommerce checkout, in Contact Form 7 and WPForms, or with the [inite_how_heard] shortcode; only a count per day and answer is kept and sent with the daily report', 'inite-agents' ) ),
 		);
 	}
 }

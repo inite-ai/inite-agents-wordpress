@@ -24,6 +24,8 @@ final class Inite_Agents_Plugin {
 		Inite_Agents_Schema::register();
 		Inite_Agents_Fixes::register();
 		Inite_Agents_Referrals::register();
+		Inite_Agents_Indexnow::register();
+		Inite_Agents_Survey::register();
 
 		add_action( Inite_Agents_Sync::CRON, array( __CLASS__, 'cron_sync' ) );
 		add_action( Inite_Agents_Ping::CRON, array( 'Inite_Agents_Ping', 'run' ) );
@@ -92,5 +94,6 @@ final class Inite_Agents_Plugin {
 		wp_clear_scheduled_hook( Inite_Agents_Ping::CRON );
 		wp_clear_scheduled_hook( Inite_Agents_Records::CRON );
 		wp_clear_scheduled_hook( Inite_Agents_Records::CRON . '_now' );
+		wp_clear_scheduled_hook( Inite_Agents_Indexnow::CRON );
 	}
 }

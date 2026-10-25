@@ -160,6 +160,16 @@ final class Inite_Agents_Admin_Overview {
 		} else {
 			$items[] = array( __( 'No analysis of this domain yet.', 'inite-agents' ), Inite_Agents_Summary::link( '/{lang}/analyze' ) );
 		}
+		$stuck = array();
+		foreach ( (array) self::at( $s, 'bots.rows', array() ) as $r ) {
+			if ( is_array( $r ) && in_array( self::at( $r, 'state' ), array( 'probably_blocked', 'robots_blocked' ), true ) && 'training' !== self::at( $r, 'kind' ) ) {
+				$stuck[] = (string) self::at( $r, 'name', '' );
+			}
+		}
+		if ( $stuck ) {
+			/* translators: %s: robot names. */
+			$items[] = array( sprintf( __( 'AI robots that may not reach your pages: %s.', 'inite-agents' ), implode( ', ', $stuck ) ), Inite_Agents_Admin::url( 'overview' ) . '#inite-agents-bots' );
+		}
 		/* translators: %s: number of reads. */
 		$items[] = array( sprintf( __( 'AI agents read your agent files %s times in 30 days.', 'inite-agents' ), self::n( self::at( $s, 'visits.total', 0 ) ) ), Inite_Agents_Admin::url( 'overview' ) . '#inite-agents-reads' );
 		/* translators: %s: number of visits. */
@@ -204,8 +214,11 @@ final class Inite_Agents_Admin_Overview {
 
 		self::analysis( $s );
 		self::assistants( $s );
+		Inite_Agents_Admin_Signals::bots( $s );
 		self::reads( $s );
 		self::referrals( $s );
+		Inite_Agents_Admin_Signals::survey( $s );
+		Inite_Agents_Admin_Signals::indexnow();
 		self::waiting( $s );
 		if ( $s && false === self::at( $s, 'premium' ) ) {
 			echo '<p class="description">' . esc_html__( 'INITE shows its thirty-day breakdowns by agent, page and assistant with Atlas Premium; here they are totals. The counts this plugin keeps itself are shown in full.', 'inite-agents' ) . '</p>';
@@ -314,6 +327,7 @@ final class Inite_Agents_Admin_Overview {
 		}
 		/* translators: 1: answers that match, 2: answers that differ. */
 		echo '<p>' . esc_html( sprintf( __( '%1$s answers match your facts, %2$s differ.', 'inite-agents' ), self::n( self::at( $a, 'match', 0 ) ), self::n( self::at( $a, 'differs', 0 ) ) ) ) . '</p>';
+		self::shares( $a );
 		$diffs = (array) self::at( $a, 'differences', array() );
 		if ( $diffs ) {
 			$facts = array(
@@ -329,6 +343,48 @@ final class Inite_Agents_Admin_Overview {
 				$key  = (string) self::at( $d, 'key', '' );
 				$said = self::at( $d, 'said' );
 				echo '<tr><td>' . esc_html( (string) self::at( $d, 'source', '' ) ) . '</td><td>' . esc_html( isset( $facts[ $key ] ) ? $facts[ $key ] : $key ) . '</td><td>' . esc_html( (string) self::at( $d, 'expected', '' ) ) . '</td><td>' . esc_html( is_string( $said ) && '' !== $said ? $said : __( 'something else (open the cabinet for the details)', 'inite-agents' ) ) . '</td></tr>';
+			}
+			echo '</tbody></table>';
+		}
+	}
+
+	/**
+	 * Each question is asked more than once, and answers vary: how often the
+	 * business was named, and how often a page of the site was cited, as shares.
+	 * Summaries before 0.10.0's service carry neither, and say nothing here.
+	 *
+	 * @param array $a The summary's assistants part.
+	 */
+	private static function shares( array $a ) {
+		$share = static function ( $v ) {
+			return is_array( $v ) && isset( $v['k'], $v['n'] ) && (int) $v['n'] > 0 ? array( (int) $v['k'], (int) $v['n'] ) : null;
+		};
+		$named = $share( self::at( $a, 'named' ) );
+		$cited = $share( self::at( $a, 'cited' ) );
+		$runs  = (int) self::at( $a, 'runs', 0 );
+		$parts = array();
+		if ( $runs > 1 ) {
+			/* translators: %d: how many times each question was asked. */
+			$parts[] = sprintf( __( 'Each question was asked %d times.', 'inite-agents' ), $runs );
+		}
+		if ( $named ) {
+			/* translators: 1: answers naming the business, 2: answers. */
+			$parts[] = sprintf( __( 'Named in %1$s of %2$s answers.', 'inite-agents' ), self::n( $named[0] ), self::n( $named[1] ) );
+		}
+		if ( $cited ) {
+			/* translators: 1: answers citing the site, 2: answers. */
+			$parts[] = sprintf( __( 'Cited with a link to your site in %1$s of %2$s.', 'inite-agents' ), self::n( $cited[0] ), self::n( $cited[1] ) );
+		}
+		if ( $parts ) {
+			echo '<p>' . esc_html( implode( ' ', $parts ) ) . '</p>';
+		}
+		$engines = (array) self::at( $a, 'engines', array() );
+		if ( $engines ) {
+			echo '<table class="widefat striped" style="max-width:640px;margin-bottom:12px"><thead><tr><th scope="col">' . esc_html__( 'Assistant', 'inite-agents' ) . '</th><th scope="col">' . esc_html__( 'Named', 'inite-agents' ) . '</th><th scope="col">' . esc_html__( 'Cited', 'inite-agents' ) . '</th></tr></thead><tbody>';
+			foreach ( $engines as $e ) {
+				$en = $share( self::at( $e, 'named' ) );
+				$ec = $share( self::at( $e, 'cited' ) );
+				echo '<tr><td>' . esc_html( (string) self::at( $e, 'source', '' ) ) . '</td><td>' . esc_html( $en ? self::n( $en[0] ) . ' / ' . self::n( $en[1] ) : '-' ) . '</td><td>' . esc_html( $ec ? self::n( $ec[0] ) . ' / ' . self::n( $ec[1] ) : __( 'no sources', 'inite-agents' ) ) . '</td></tr>';
 			}
 			echo '</tbody></table>';
 		}

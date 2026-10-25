@@ -135,9 +135,10 @@ final class Inite_Agents_Admin_Fixes {
 		$paste = $now['physical'] ? self::note( esc_html__( 'A robots.txt file exists on the server, so WordPress does not generate one and this fix cannot add to it. Paste the preview into that file instead.', 'inite-agents' ) ) : '';
 
 		$groups = array(
-			'training' => array( __( 'Block crawlers that collect pages to train AI models', 'inite-agents' ), '' ),
-			'search'   => array( __( 'Block AI search crawlers', 'inite-agents' ), __( 'Assistants then cannot find and cite your pages.', 'inite-agents' ) ),
-			'answer'   => array( __( 'Block assistants opening a page for a person who asked', 'inite-agents' ), __( 'Assistants then cannot read your page when someone asks about you.', 'inite-agents' ) ),
+			'training'        => array( __( 'Block crawlers that collect pages to train AI models', 'inite-agents' ), __( 'Assistants also answer from what they were trained on: blocking these keeps your pages out of future models, and with them what those models know about you.', 'inite-agents' ) ),
+			'google_extended' => array( __( 'Block Google-Extended', 'inite-agents' ), __( 'Blocking Google-Extended removes the site from the Gemini app; AI Overviews are not affected.', 'inite-agents' ) ),
+			'search'          => array( __( 'Block AI search crawlers', 'inite-agents' ), __( 'Assistants then cannot find and cite your pages.', 'inite-agents' ) ),
+			'answer'          => array( __( 'Block assistants opening a page for a person who asked', 'inite-agents' ), __( 'Assistants then cannot read your page when someone asks about you.', 'inite-agents' ) ),
 		);
 		$sub = '<fieldset style="margin-top:8px"><legend class="screen-reader-text">' . esc_html__( 'Which AI crawlers to block', 'inite-agents' ) . '</legend>';
 		foreach ( $groups as $g => $words ) {
@@ -145,7 +146,8 @@ final class Inite_Agents_Admin_Fixes {
 		}
 		$sub  .= '</fieldset>';
 		$lines = Inite_Agents_Fixes::policy_lines( $now['text'], $s['robots_block'] );
-		$sub  .= self::note( esc_html__( 'Recommended: block training only, and let search and answers in. An agent another plugin already names in robots.txt is left to it.', 'inite-agents' ) );
+		$sub  .= self::note( esc_html__( 'Recommended: leave every box empty, so search crawlers, assistants and training crawlers all read your pages. Block a group only for a reason of your own, such as pages for paying members. An agent another plugin already names in robots.txt is left to it.', 'inite-agents' ) );
+		$sub  .= self::note( esc_html__( 'Your firewall or CDN can block these robots too, whatever robots.txt says: the Overview tab shows what INITE saw when it opened your pages with each robot\'s name.', 'inite-agents' ) );
 		$sub  .= $paste . ( '' !== $lines ? self::preview( $lines ) : self::note( esc_html__( 'Nothing to add with these choices.', 'inite-agents' ) ) );
 		self::row( 'robots_policy', __( 'AI crawlers', 'inite-agents' ), __( 'Tell AI crawlers in robots.txt what they may do', 'inite-agents' ), $sub );
 
