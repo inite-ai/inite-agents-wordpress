@@ -4,7 +4,7 @@ Tags: ai, llms.txt, mcp, agents, schema
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.8.0
+Stable tag: 0.9.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -155,6 +155,11 @@ INITE privacy policy: https://inite.ai/en/privacy
 
 == Changelog ==
 
+= 0.9.0 =
+* Branches: with two places or more, the JSON-LD names the company and each branch as a business of its own, with its address, coordinates, phone, hours and special days, linked to the company. Merged into Yoast SEO's or Rank Math's graph beside their business node, never twice.
+* Special days: holidays and short days (one date or a range) from your confirmed facts, as specialOpeningHoursSpecification; a day that has passed drops out by itself.
+* Menus: a café's or restaurant's confirmed menus as Menu, MenuSection and MenuItem with prices and diets; the WebMCP script offers agents a menu tool, and its hours tool answers for a given date and branch.
+
 = 0.8.0 =
 * "What this site sends to INITE": a switch for each kind of data, each off until you turn it on and each naming the fields it sends. Pages and posts, WooCommerce products and The Events Calendar's events are sent a hundred at a time, only what changed, and deleted at INITE when you switch them off. Services from Bookly or Amelia, and locations and hours from WP Store Locator, Yoast Local SEO or Rank Math Local SEO, arrive in the cabinet as suggestions.
 * `/llms-full.txt`: your confirmed facts, then every page, article, event and published product. Left alone, like llms.txt, where another plugin serves its own.
@@ -184,6 +189,9 @@ INITE privacy policy: https://inite.ai/en/privacy
 * First release: root files, robots.txt Content-Signal, head tags, abilities for the MCP Adapter, daily report.
 
 == Upgrade Notice ==
+
+= 0.9.0 =
+Adds branches, special days and menus to the JSON-LD and the WebMCP tools, from the facts you confirm in INITE. Nothing changes on a site whose facts have none of them.
 
 = 0.8.0 =
 Adds "What this site sends to INITE": pages, products, events, booking services and locations, each sent only after you switch it on. Site basics are now off until you switch them on too.

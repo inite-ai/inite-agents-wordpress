@@ -17,6 +17,14 @@
  * version (the manifest's head.jsonLd); the products are built here from the
  * same version's public facts.
  *
+ * Branches (0.9.0): with two places or more the business is the company and
+ * each branch a LocalBusiness of its own (parentOrganization the company),
+ * with its own hours and special days (specialOpeningHoursSpecification);
+ * a food business's menus are Menu nodes. They go with the business fix:
+ * into Yoast's or Rank Math's graph beside their business node, which gains
+ * `department` and becomes their parent; never a second copy of an @id they
+ * print.
+ *
  * @package Inite_Agents
  */
 
@@ -33,7 +41,7 @@ final class Inite_Agents_Schema {
 	const FAQ_BLOCKS = array( 'yoast/faq-block', 'rank-math/faq-block', 'aioseo/faq' );
 
 	/** The types that make a node "the business". */
-	const BUSINESS_TYPES = array( 'Organization', 'LocalBusiness', 'Corporation', 'OnlineBusiness', 'OnlineStore', 'Store', 'ProfessionalService', 'MedicalBusiness', 'Dentist', 'Physician', 'Restaurant', 'LegalService', 'HomeAndConstructionBusiness', 'HealthAndBeautyBusiness' );
+	const BUSINESS_TYPES = array( 'Organization', 'LocalBusiness', 'Corporation', 'OnlineBusiness', 'OnlineStore', 'Store', 'ProfessionalService', 'MedicalBusiness', 'Dentist', 'Physician', 'Restaurant', 'LegalService', 'HomeAndConstructionBusiness', 'HealthAndBeautyBusiness', 'FoodEstablishment', 'CafeOrCoffeeShop', 'Bakery', 'BarOrPub', 'FastFoodRestaurant', 'IceCreamShop' );
 
 	/**
 	 * Set when an SEO plugin's graph took our nodes on this request.
@@ -80,7 +88,7 @@ final class Inite_Agents_Schema {
 	 * Our nodes, by fix, as switched on, before any other plugin is looked at.
 	 *
 	 * @param bool $all Every type, whether switched on or not (for the previews).
-	 * @return array{business:?array,faq:?array,products:array}
+	 * @return array{business:?array,faq:?array,products:array,branches:array,menus:array}
 	 */
 	public static function nodes( $all = false ) {
 		$copy  = Inite_Agents_Store::get();
@@ -89,13 +97,23 @@ final class Inite_Agents_Schema {
 			'business' => null,
 			'faq'      => null,
 			'products' => array(),
+			'branches' => array(),
+			'menus'    => array(),
 		);
+		$business_on = $all || Inite_Agents_Settings::fix( 'schema_business' );
 		foreach ( $graph as $node ) {
 			if ( ! is_array( $node ) || ! isset( $node['@type'] ) ) {
 				continue;
 			}
-			if ( self::is_business( $node ) && ( $all || Inite_Agents_Settings::fix( 'schema_business' ) ) ) {
-				$out['business'] = $node;
+			if ( self::is_business( $node ) && $business_on ) {
+				// A branch names its company; the company is the one node that does not.
+				if ( isset( $node['parentOrganization'] ) ) {
+					$out['branches'][] = $node;
+				} elseif ( null === $out['business'] ) {
+					$out['business'] = $node;
+				}
+			} elseif ( 'Menu' === $node['@type'] && $business_on ) {
+				$out['menus'][] = $node;
 			} elseif ( 'FAQPage' === $node['@type'] && ( $all || Inite_Agents_Settings::fix( 'schema_faq' ) ) ) {
 				$out['faq'] = $node;
 			}
@@ -213,13 +231,26 @@ final class Inite_Agents_Schema {
 			if ( '' === $their || '' === $our_id ) {
 				return $node;
 			}
-			foreach ( array( 'about', 'brand' ) as $ref ) {
+			foreach ( array( 'about', 'brand', 'parentOrganization' ) as $ref ) {
 				if ( isset( $node[ $ref ]['@id'] ) && $our_id === $node[ $ref ]['@id'] ) {
 					$node[ $ref ]['@id'] = $their;
 				}
 			}
 			return $node;
 		};
+		$ids = array();
+		foreach ( $graph as $node ) {
+			if ( is_array( $node ) && ! empty( $node['@id'] ) ) {
+				$ids[ (string) $node['@id'] ] = true;
+			}
+		}
+		foreach ( array_merge( $ours['branches'], $ours['menus'] ) as $node ) {
+			if ( empty( $node['@id'] ) || isset( $ids[ (string) $node['@id'] ] ) ) {
+				continue;
+			}
+			$graph[] = $remap( $node );
+			$added[] = 'Menu' === $node['@type'] ? 'Menu' : 'Branch';
+		}
 		if ( $ours['faq'] && ! $has( 'FAQPage' ) && '' === self::faq_block() ) {
 			$graph[] = $remap( $ours['faq'] );
 			$added[] = 'FAQPage';
@@ -295,6 +326,10 @@ final class Inite_Agents_Schema {
 		}
 		if ( $ours['business'] && '' === $owner ) {
 			$keep[] = $ours['business'];
+			// The branches and menus hang from our business node: without it they would name a company nobody prints.
+			foreach ( array_merge( $ours['branches'], $ours['menus'] ) as $node ) {
+				$keep[] = $node;
+			}
 		}
 		if ( $ours['faq'] && '' === self::faq_block() ) {
 			$keep[] = $ours['faq'];

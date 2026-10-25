@@ -53,6 +53,9 @@ final class Inite_Agents_Head {
 	 */
 	private static function settings( $copy, $facts ) {
 		$out = array( 'facts' => $facts );
+		if ( ! empty( $copy['manifest']['features']['menu'] ) ) {
+			$out['menu'] = true;
+		}
 		$req = isset( $copy['manifest']['features']['requests'] ) && is_array( $copy['manifest']['features']['requests'] ) ? $copy['manifest']['features']['requests'] : array();
 		$url = isset( $req['url'] ) && is_string( $req['url'] ) ? $req['url'] : '';
 		if ( ! empty( $req['enabled'] ) && 0 === strpos( $url, Inite_Agents_Settings::api_base() . '/api/site/v1/public/' ) ) {
