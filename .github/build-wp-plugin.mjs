@@ -23,6 +23,13 @@
  * none): stored entries are deflated with node:zlib, and every entry has
  * the same date, so the same sources give the same bytes.
  *
+ * The translations ride in languages/: for each locale the .po the
+ * translators edit and the .mo WordPress reads, compiled from it with
+ * `msgfmt -o languages/inite-agents-<locale>.mo languages/inite-agents-<locale>.po`.
+ * Both zips carry them; the build refuses a .po without its .mo, and
+ * __tests__/site-facts/the-wordpress-plugin-speaks-their-language.test.ts
+ * fails when a .mo is not its .po or a string is left untranslated.
+ *
  * It refuses to build when the version in the plugin header, the
  * INITE_AGENTS_VERSION constant and readme.txt's Stable tag disagree:
  * WordPress.org reads the readme, WordPress reads the header.
@@ -102,6 +109,15 @@ export function versions(dir = PLUGIN_DIR) {
   }
 }
 
+/** The locales the plugin carries a translation for: languages/inite-agents-<locale>.po, sorted. */
+export function translationLocales(dir = PLUGIN_DIR) {
+  const langs = path.join(dir, 'languages')
+  return readdirSync(langs)
+    .map((name) => new RegExp(`^${SLUG}-([a-z]{2,3}(?:_[A-Z]{2}|_[0-9]{3})?)\\.po$`).exec(name)?.[1])
+    .filter(Boolean)
+    .sort()
+}
+
 const CRC_TABLE = (() => {
   const t = new Uint32Array(256)
   for (let n = 0; n < 256; n++) {
@@ -177,6 +193,9 @@ export function buildPluginZip(dir = PLUGIN_DIR, { org = false } = {}) {
     throw new Error(`inite-agents: versions disagree (header ${v.header}, INITE_AGENTS_VERSION ${v.constant}, Stable tag ${v.stableTag})`)
   }
   const files = pluginFiles(dir).filter((rel) => !org || rel !== UPDATER_FILE)
+  for (const locale of translationLocales(dir)) {
+    if (!files.includes(`languages/${SLUG}-${locale}.mo`)) throw new Error(`inite-agents: languages/${SLUG}-${locale}.po has no .mo: run msgfmt -o languages/${SLUG}-${locale}.mo languages/${SLUG}-${locale}.po`)
+  }
   const entries = files.map((rel) => {
     let data = readFileSync(path.join(dir, rel))
     if (org && rel === `${SLUG}.php`) data = Buffer.from(data.toString('utf8').replace(UPDATE_URI_LINE, ''), 'utf8')

@@ -1,0 +1,1459 @@
+# Translation of INITE Agents in Spanish (Spain)
+# This file is distributed under the GPL-2.0-or-later.
+msgid ""
+msgstr ""
+"Project-Id-Version: INITE Agents 0.10.1\n"
+"Report-Msgid-Bugs-To: https://inite.ai/en/contact\n"
+"Last-Translator: INITE <info@inite.ai>\n"
+"Language-Team: Spanish (Spain)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-10-25T13:55:54+00:00\n"
+"PO-Revision-Date: 2026-10-25 12:00+0000\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: inite-agents\n"
+"Language: es_ES\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. Plugin Name of the plugin
+#: inite-agents.php
+#: includes/class-inite-agents-admin-overview.php:38
+#: includes/class-inite-agents-admin.php:33
+#: includes/class-inite-agents-admin.php:121
+msgid "INITE Agents"
+msgstr "INITE Agents"
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: inite-agents.php
+msgid "https://inite.ai/"
+msgstr "https://inite.ai/"
+
+#. Description of the plugin
+#: inite-agents.php
+msgid "Serves the facts your business confirmed in INITE to AI agents (llms.txt and llms-full.txt, the agent card and MCP files, robots.txt signals, head tags, JSON-LD, abilities for the MCP Adapter), shows in WordPress what agents and assistants do with your site, and sends INITE the pages, products and events you switch on."
+msgstr "Sirve a los agentes de IA los datos que tu negocio confirmó en INITE (llms.txt y llms-full.txt, la agent card y los archivos MCP, señales en robots.txt, etiquetas del head, JSON-LD, habilidades para el MCP Adapter), muestra en WordPress qué hacen los agentes y asistentes con tu sitio y envía a INITE las páginas, productos y eventos que actives."
+
+#. Author of the plugin
+#: inite-agents.php
+msgid "INITE"
+msgstr "INITE"
+
+#: includes/class-inite-agents-abilities.php:63
+#: includes/class-inite-agents-abilities.php:109
+msgid "Business facts"
+msgstr "Datos del negocio"
+
+#: includes/class-inite-agents-abilities.php:64
+msgid "Facts this business confirmed in INITE for AI agents: what it is, its services and prices, hours, locations and answers to common questions."
+msgstr "Datos que este negocio confirmó en INITE para los agentes de IA: qué es, sus servicios y precios, horario, ubicaciones y respuestas a preguntas frecuentes."
+
+#: includes/class-inite-agents-abilities.php:74
+msgid "Only what the business confirmed is returned; nothing is estimated."
+msgstr "Solo se devuelve lo que el negocio confirmó; no se estima nada."
+
+#: includes/class-inite-agents-abilities.php:81
+msgid "Optional words to narrow the list; omitted, everything is returned."
+msgstr "Palabras opcionales para acotar la lista; si se omiten, se devuelve todo."
+
+#: includes/class-inite-agents-abilities.php:110
+msgid "What this business is: its name, what it does in one line, its kind, the languages it serves in, and how to reach it (email, phone, booking and contact pages)."
+msgstr "Qué es este negocio: su nombre, a qué se dedica en una línea, su tipo, los idiomas en los que atiende y cómo contactar con él (correo, teléfono, páginas de reservas y de contacto)."
+
+#: includes/class-inite-agents-abilities.php:131
+msgid "Services and prices"
+msgstr "Servicios y precios"
+
+#: includes/class-inite-agents-abilities.php:132
+msgid "The services this business offers, each with its price exactly as the business confirmed it (amount, currency and unit), \"on request\" where the business said so, or no price where none was confirmed. Never an estimate."
+msgstr "Los servicios que ofrece este negocio, cada uno con su precio tal como lo confirmó el negocio (importe, moneda y unidad), \"a consultar\" donde así lo indicó, o sin precio donde no se confirmó ninguno. Nunca una estimación."
+
+#: includes/class-inite-agents-abilities.php:137
+msgid "Opening hours"
+msgstr "Horario"
+
+#: includes/class-inite-agents-abilities.php:138
+msgid "The opening hours in the business's own time zone, and whether it is open right now by that clock."
+msgstr "El horario en la zona horaria del propio negocio, y si está abierto ahora mismo según esa hora."
+
+#: includes/class-inite-agents-abilities.php:156
+msgid "Locations"
+msgstr "Ubicaciones"
+
+#: includes/class-inite-agents-abilities.php:157
+msgid "Where the business is: each address with its city, country, phone and map link."
+msgstr "Dónde está el negocio: cada dirección con su ciudad, país, teléfono y enlace al mapa."
+
+#: includes/class-inite-agents-abilities.php:162
+msgid "Questions and answers"
+msgstr "Preguntas y respuestas"
+
+#: includes/class-inite-agents-abilities.php:163
+msgid "The business's own answers to common questions."
+msgstr "Las respuestas del propio negocio a preguntas frecuentes."
+
+#: includes/class-inite-agents-abilities.php:210
+msgid "No confirmed facts are stored yet."
+msgstr "Aún no hay datos confirmados guardados."
+
+#: includes/class-inite-agents-abilities.php:246
+msgid "Unknown ability."
+msgstr "Habilidad desconocida."
+
+#: includes/class-inite-agents-admin-fixes.php:25
+msgid "Preview"
+msgstr "Vista previa"
+
+#: includes/class-inite-agents-admin-fixes.php:62
+msgid "The fixes use the facts your business confirmed in INITE. Add the site key first."
+msgstr "Las correcciones usan los datos que tu negocio confirmó en INITE. Primero añade la clave del sitio."
+
+#: includes/class-inite-agents-admin-fixes.php:62
+#: includes/class-inite-agents-admin-overview.php:135
+#: includes/class-inite-agents-admin-overview.php:197
+msgid "Add the site key"
+msgstr "Añadir la clave del sitio"
+
+#: includes/class-inite-agents-admin-fixes.php:65
+msgid "Each fix adds one thing the analysis looks for, built from your confirmed facts. Open \"Preview\" to see exactly what it adds. Nothing is added while a fix is off, and nothing another plugin already prints is printed twice."
+msgstr "Cada corrección añade una cosa que busca el análisis, creada a partir de tus datos confirmados. Abre \"Vista previa\" para ver exactamente qué añade. No se añade nada mientras una corrección está desactivada, y nada que otro plugin ya imprima se imprime dos veces."
+
+#: includes/class-inite-agents-admin-fixes.php:69
+msgid "Structured data (JSON-LD) on the front page"
+msgstr "Datos estructurados (JSON-LD) en la página de inicio"
+
+#. translators: %s: SEO plugin name.
+#: includes/class-inite-agents-admin-fixes.php:73
+#, php-format
+msgid "%s is active: what you switch on here goes into its schema graph. A value it already has is kept; only what it lacks is added, and a type it already prints is not added twice."
+msgstr "%s está activo: lo que actives aquí entra en su grafo de schema. Un valor que ya tiene se conserva; solo se añade lo que le falta, y un tipo que ya imprime no se añade dos veces."
+
+#: includes/class-inite-agents-admin-fixes.php:78
+#: includes/class-inite-agents-admin-signals.php:108
+#: includes/class-inite-agents-admin.php:208
+msgid "robots.txt"
+msgstr "robots.txt"
+
+#: includes/class-inite-agents-admin-fixes.php:81
+msgid "Front page"
+msgstr "Página de inicio"
+
+#: includes/class-inite-agents-admin-fixes.php:84
+msgid "Save fixes"
+msgstr "Guardar correcciones"
+
+#: includes/class-inite-agents-admin-fixes.php:100
+msgid "Nothing to add yet: the stored copy has no business node. Test the connection in Settings."
+msgstr "Aún no hay nada que añadir: la copia guardada no tiene nodo del negocio. Prueba la conexión en Ajustes."
+
+#. translators: %s: SEO plugin name.
+#: includes/class-inite-agents-admin-fixes.php:104
+#, php-format
+msgid "Left out: %s already prints an Organization."
+msgstr "Omitido: %s ya imprime un Organization."
+
+#: includes/class-inite-agents-admin-fixes.php:108
+msgid "Business"
+msgstr "Negocio"
+
+#: includes/class-inite-agents-admin-fixes.php:108
+msgid "Organization or LocalBusiness: name, description, address, opening hours, phone, email and services"
+msgstr "Organization o LocalBusiness: nombre, descripción, dirección, horario, teléfono, correo y servicios"
+
+#: includes/class-inite-agents-admin-fixes.php:112
+msgid "Nothing to add: your confirmed facts have no questions and answers."
+msgstr "Nada que añadir: tus datos confirmados no tienen preguntas y respuestas."
+
+#: includes/class-inite-agents-admin-fixes.php:114
+msgid "Left out of a page that has an SEO plugin's FAQ block, which prints its own."
+msgstr "Se omite en una página que tiene el bloque de FAQ de un plugin SEO, que imprime el suyo."
+
+#: includes/class-inite-agents-admin-fixes.php:116
+msgid "Questions"
+msgstr "Preguntas"
+
+#: includes/class-inite-agents-admin-fixes.php:116
+msgid "FAQPage from the questions and answers you confirmed"
+msgstr "FAQPage a partir de las preguntas y respuestas que confirmaste"
+
+#: includes/class-inite-agents-admin-fixes.php:120
+msgid "Nothing to add: no confirmed service is sold per item with a price. Services stay in the business node as offers."
+msgstr "Nada que añadir: ningún servicio confirmado se vende por unidad con precio. Los servicios quedan en el nodo del negocio como ofertas."
+
+#: includes/class-inite-agents-admin-fixes.php:124
+#: includes/class-inite-agents-admin-sending.php:30
+msgid "Products"
+msgstr "Productos"
+
+#: includes/class-inite-agents-admin-fixes.php:124
+msgid "A Product with its price for each confirmed service sold per item"
+msgstr "Un Product con su precio para cada servicio confirmado que se vende por unidad"
+
+#: includes/class-inite-agents-admin-fixes.php:135
+msgid "A robots.txt file exists on the server, so WordPress does not generate one and this fix cannot add to it. Paste the preview into that file instead."
+msgstr "Hay un archivo robots.txt en el servidor, así que WordPress no genera uno y esta corrección no puede añadirle nada. Pega la vista previa en ese archivo."
+
+#: includes/class-inite-agents-admin-fixes.php:138
+msgid "Block crawlers that collect pages to train AI models"
+msgstr "Bloquear los rastreadores que recogen páginas para entrenar modelos de IA"
+
+#: includes/class-inite-agents-admin-fixes.php:138
+msgid "Assistants also answer from what they were trained on: blocking these keeps your pages out of future models, and with them what those models know about you."
+msgstr "Los asistentes también responden con lo que aprendieron en su entrenamiento: bloquearlos deja tus páginas fuera de los modelos futuros, y con ellas lo que esos modelos saben de ti."
+
+#: includes/class-inite-agents-admin-fixes.php:139
+msgid "Block Google-Extended"
+msgstr "Bloquear Google-Extended"
+
+#: includes/class-inite-agents-admin-fixes.php:139
+msgid "Blocking Google-Extended removes the site from the Gemini app; AI Overviews are not affected."
+msgstr "Bloquear Google-Extended saca el sitio de la app de Gemini; las AI Overviews no se ven afectadas."
+
+#: includes/class-inite-agents-admin-fixes.php:140
+msgid "Block AI search crawlers"
+msgstr "Bloquear los rastreadores de búsqueda con IA"
+
+#: includes/class-inite-agents-admin-fixes.php:140
+msgid "Assistants then cannot find and cite your pages."
+msgstr "Así los asistentes no pueden encontrar ni citar tus páginas."
+
+#: includes/class-inite-agents-admin-fixes.php:141
+msgid "Block assistants opening a page for a person who asked"
+msgstr "Bloquear a los asistentes que abren una página para una persona que lo pidió"
+
+#: includes/class-inite-agents-admin-fixes.php:141
+msgid "Assistants then cannot read your page when someone asks about you."
+msgstr "Así los asistentes no pueden leer tu página cuando alguien pregunta por ti."
+
+#: includes/class-inite-agents-admin-fixes.php:143
+msgid "Which AI crawlers to block"
+msgstr "Qué rastreadores de IA bloquear"
+
+#: includes/class-inite-agents-admin-fixes.php:149
+msgid "Recommended: leave every box empty, so search crawlers, assistants and training crawlers all read your pages. Block a group only for a reason of your own, such as pages for paying members. An agent another plugin already names in robots.txt is left to it."
+msgstr "Recomendado: deja todas las casillas vacías, para que los rastreadores de búsqueda, los asistentes y los rastreadores de entrenamiento lean tus páginas. Bloquea un grupo solo por un motivo propio, como páginas para miembros de pago. Un agente que otro plugin ya nombra en robots.txt se deja en sus manos."
+
+#: includes/class-inite-agents-admin-fixes.php:150
+msgid "Your firewall or CDN can block these robots too, whatever robots.txt says: the Overview tab shows what INITE saw when it opened your pages with each robot's name."
+msgstr "Tu firewall o CDN también puede bloquear estos robots, diga lo que diga robots.txt: la pestaña Resumen muestra lo que vio INITE al abrir tus páginas con el nombre de cada robot."
+
+#: includes/class-inite-agents-admin-fixes.php:151
+msgid "Nothing to add with these choices."
+msgstr "Nada que añadir con estas opciones."
+
+#: includes/class-inite-agents-admin-fixes.php:152
+msgid "AI crawlers"
+msgstr "Rastreadores de IA"
+
+#: includes/class-inite-agents-admin-fixes.php:152
+msgid "Tell AI crawlers in robots.txt what they may do"
+msgstr "Indicar en robots.txt a los rastreadores de IA qué pueden hacer"
+
+#: includes/class-inite-agents-admin-fixes.php:157
+msgid "No sitemap found: WordPress's own sitemap is switched off and no SEO plugin provides one."
+msgstr "No se encontró ningún sitemap: el sitemap propio de WordPress está desactivado y ningún plugin SEO ofrece uno."
+
+#. translators: %s: sitemap address.
+#: includes/class-inite-agents-admin-fixes.php:160
+#, php-format
+msgid "Check passed: robots.txt already names a sitemap. Yours is %s."
+msgstr "Comprobación superada: robots.txt ya nombra un sitemap. El tuyo es %s."
+
+#: includes/class-inite-agents-admin-fixes.php:162
+msgid "Check failed: robots.txt does not name your sitemap, so a crawler has to guess where it is."
+msgstr "Comprobación fallida: robots.txt no nombra tu sitemap, así que un rastreador tiene que adivinar dónde está."
+
+#: includes/class-inite-agents-admin-fixes.php:164
+msgid "Sitemap link"
+msgstr "Enlace al sitemap"
+
+#: includes/class-inite-agents-admin-fixes.php:164
+msgid "Name the sitemap in robots.txt"
+msgstr "Nombrar el sitemap en robots.txt"
+
+#. translators: %s: SEO plugin name.
+#: includes/class-inite-agents-admin-fixes.php:173
+#, php-format
+msgid "Not needed: %s writes the meta description. Set it there."
+msgstr "No hace falta: %s escribe la meta descripción. Configúrala allí."
+
+#: includes/class-inite-agents-admin-fixes.php:175
+msgid "Nothing to add: there is no confirmed description and no tagline."
+msgstr "Nada que añadir: no hay descripción confirmada ni descripción corta."
+
+#: includes/class-inite-agents-admin-fixes.php:177
+msgid "From the one-line description you confirmed in INITE. If your theme already prints a meta description, leave this off."
+msgstr "A partir de la descripción de una línea que confirmaste en INITE. Si tu tema ya imprime una meta descripción, déjalo desactivado."
+
+#: includes/class-inite-agents-admin-fixes.php:179
+msgid "Meta description"
+msgstr "Meta descripción"
+
+#: includes/class-inite-agents-admin-fixes.php:179
+msgid "Add a meta description to the front page"
+msgstr "Añadir una meta descripción a la página de inicio"
+
+#: includes/class-inite-agents-admin-overview.php:45
+#: includes/class-inite-agents-admin.php:63
+#: includes/class-inite-agents-requests.php:61
+msgid "You are not allowed to do this."
+msgstr "No tienes permiso para hacer esto."
+
+#: includes/class-inite-agents-admin-overview.php:90
+msgid "Organization schema on the front page"
+msgstr "Schema Organization en la página de inicio"
+
+#: includes/class-inite-agents-admin-overview.php:91
+msgid "LocalBusiness schema on the front page"
+msgstr "Schema LocalBusiness en la página de inicio"
+
+#: includes/class-inite-agents-admin-overview.php:92
+msgid "FAQPage schema"
+msgstr "Schema FAQPage"
+
+#: includes/class-inite-agents-admin-overview.php:93
+msgid "Product schema"
+msgstr "Schema Product"
+
+#: includes/class-inite-agents-admin-overview.php:94
+msgid "Meta description on the front page"
+msgstr "Meta descripción en la página de inicio"
+
+#: includes/class-inite-agents-admin-overview.php:95
+msgid "A2A agent card at /.well-known/agent-card.json"
+msgstr "Agent card de A2A en /.well-known/agent-card.json"
+
+#: includes/class-inite-agents-admin-overview.php:96
+msgid "MCP server card at /.well-known/mcp.json"
+msgstr "Server card de MCP en /.well-known/mcp.json"
+
+#: includes/class-inite-agents-admin-overview.php:97
+msgid "API catalog at /.well-known/api-catalog"
+msgstr "Catálogo de API en /.well-known/api-catalog"
+
+#: includes/class-inite-agents-admin-overview.php:98
+msgid "Content Signals in robots.txt"
+msgstr "Content Signals en robots.txt"
+
+#: includes/class-inite-agents-admin-overview.php:135
+#: includes/class-inite-agents-admin-overview.php:197
+msgid "Connect the site with its INITE site key to see what AI agents and assistants do with it."
+msgstr "Conecta el sitio con su clave del sitio de INITE para ver qué hacen con él los agentes y asistentes de IA."
+
+#: includes/class-inite-agents-admin-overview.php:141
+msgid "The summary arrives with the next hourly sync."
+msgstr "El resumen llega con la próxima sincronización horaria."
+
+#: includes/class-inite-agents-admin-overview.php:141
+msgid "Open the overview"
+msgstr "Abrir el resumen"
+
+#. translators: %d: score out of 100.
+#: includes/class-inite-agents-admin-overview.php:154
+#, php-format
+msgid "AI visibility: %d of 100."
+msgstr "Visibilidad en IA: %d de 100."
+
+#. translators: %d: number of checks.
+#: includes/class-inite-agents-admin-overview.php:157
+#, php-format
+msgid "%d failed check can be fixed here."
+msgid_plural "%d failed checks can be fixed here."
+msgstr[0] "%d comprobación fallida se puede corregir aquí."
+msgstr[1] "%d comprobaciones fallidas se pueden corregir aquí."
+
+#: includes/class-inite-agents-admin-overview.php:161
+msgid "No analysis of this domain yet."
+msgstr "Aún no hay ningún análisis de este dominio."
+
+#. translators: %s: robot names.
+#: includes/class-inite-agents-admin-overview.php:171
+#, php-format
+msgid "AI robots that may not reach your pages: %s."
+msgstr "Robots de IA que no pueden llegar a tus páginas: %s."
+
+#. translators: %s: number of reads.
+#: includes/class-inite-agents-admin-overview.php:174
+#, php-format
+msgid "AI agents read your agent files %s times in 30 days."
+msgstr "Los agentes de IA leyeron tus archivos para agentes %s veces en 30 días."
+
+#. translators: %s: number of visits.
+#: includes/class-inite-agents-admin-overview.php:176
+#, php-format
+msgid "People from AI assistants: %s in 30 days."
+msgstr "Personas desde asistentes de IA: %s en 30 días."
+
+#. translators: %s: number of suggestions.
+#: includes/class-inite-agents-admin-overview.php:181
+#, php-format
+msgid "%s suggestion from your site waits in INITE."
+msgid_plural "%s suggestions from your site wait in INITE."
+msgstr[0] "%s sugerencia de tu sitio te espera en INITE."
+msgstr[1] "%s sugerencias de tu sitio te esperan en INITE."
+
+#. translators: %s: number of articles.
+#: includes/class-inite-agents-admin-overview.php:185
+#, php-format
+msgid "%s article waits for your approval in INITE."
+msgid_plural "%s articles wait for your approval in INITE."
+msgstr[0] "%s artículo espera tu aprobación en INITE."
+msgstr[1] "%s artículos esperan tu aprobación en INITE."
+
+#: includes/class-inite-agents-admin-overview.php:191
+#: includes/class-inite-agents-admin.php:117
+msgid "Overview"
+msgstr "Resumen"
+
+#: includes/class-inite-agents-admin-overview.php:191
+msgid "INITE cabinet"
+msgstr "Panel de INITE"
+
+#: includes/class-inite-agents-admin-overview.php:191
+#: includes/class-inite-agents-admin-overview.php:239
+msgid "(opens in a new tab)"
+msgstr "(se abre en una pestaña nueva)"
+
+#: includes/class-inite-agents-admin-overview.php:203
+msgid "Showing the last summary received."
+msgstr "Se muestra el último resumen recibido."
+
+#. translators: %s: date and time.
+#: includes/class-inite-agents-admin-overview.php:208
+#, php-format
+msgid "From INITE, %s."
+msgstr "De INITE, %s."
+
+#: includes/class-inite-agents-admin-overview.php:212
+msgid "Refresh"
+msgstr "Actualizar"
+
+#: includes/class-inite-agents-admin-overview.php:224
+msgid "INITE shows its thirty-day breakdowns by agent, page and assistant with Atlas Premium; here they are totals. The counts this plugin keeps itself are shown in full."
+msgstr "INITE muestra el desglose de treinta días por agente, página y asistente con Atlas Premium; aquí son totales. Los recuentos que guarda este plugin se muestran completos."
+
+#: includes/class-inite-agents-admin-overview.php:253
+msgid "others"
+msgstr "otros"
+
+#: includes/class-inite-agents-admin-overview.php:281
+msgid "AI visibility"
+msgstr "Visibilidad en IA"
+
+#: includes/class-inite-agents-admin-overview.php:281
+msgid "Open the full report in INITE"
+msgstr "Abrir el informe completo en INITE"
+
+#: includes/class-inite-agents-admin-overview.php:281
+msgid "Analyze the site in INITE"
+msgstr "Analizar el sitio en INITE"
+
+#: includes/class-inite-agents-admin-overview.php:283
+msgid "No analysis of this domain yet. Once one runs, its score and the checks it failed appear here."
+msgstr "Aún no hay ningún análisis de este dominio. Cuando se haga uno, su puntuación y las comprobaciones que falló aparecerán aquí."
+
+#. translators: 1: score out of 100, 2: date.
+#: includes/class-inite-agents-admin-overview.php:288
+#, php-format
+msgid "%1$s of 100, analysis of %2$s."
+msgstr "%1$s de 100, análisis del %2$s."
+
+#: includes/class-inite-agents-admin-overview.php:291
+msgid "The analysis found nothing here that the site can fix by itself."
+msgstr "El análisis no encontró aquí nada que el sitio pueda corregir por sí mismo."
+
+#: includes/class-inite-agents-admin-overview.php:294
+msgid "Failed check"
+msgstr "Comprobación fallida"
+
+#: includes/class-inite-agents-admin-overview.php:294
+msgid "What to do"
+msgstr "Qué hacer"
+
+#. translators: %s: SEO plugin name.
+#: includes/class-inite-agents-admin-overview.php:303
+#, php-format
+msgid "%s writes it: set it there."
+msgstr "%s lo escribe: configúralo allí."
+
+#: includes/class-inite-agents-admin-overview.php:305
+msgid "Done in the INITE cabinet."
+msgstr "Hecho en el panel de INITE."
+
+#: includes/class-inite-agents-admin-overview.php:307
+msgid "On here. The next analysis will see it."
+msgstr "Activado aquí. El próximo análisis lo verá."
+
+#: includes/class-inite-agents-admin-overview.php:309
+msgid "Switch on the fix"
+msgstr "Activar la corrección"
+
+#: includes/class-inite-agents-admin-overview.php:309
+msgid "Switch on the feature"
+msgstr "Activar la función"
+
+#: includes/class-inite-agents-admin-overview.php:323
+msgid "What assistants say about you"
+msgstr "Qué dicen los asistentes de ti"
+
+#: includes/class-inite-agents-admin-overview.php:323
+msgid "Compare in the INITE cabinet"
+msgstr "Comparar en el panel de INITE"
+
+#: includes/class-inite-agents-admin-overview.php:325
+msgid "Not checked yet. INITE asks AI assistants about your business and compares the answers with your confirmed facts; the result appears here."
+msgstr "Aún no comprobado. INITE pregunta a los asistentes de IA por tu negocio y compara las respuestas con tus datos confirmados; el resultado aparecerá aquí."
+
+#. translators: 1: answers that match, 2: answers that differ.
+#: includes/class-inite-agents-admin-overview.php:329
+#, php-format
+msgid "%1$s answers match your facts, %2$s differ."
+msgstr "%1$s respuestas coinciden con tus datos, %2$s no."
+
+#: includes/class-inite-agents-admin-overview.php:334
+msgid "What you do"
+msgstr "A qué te dedicas"
+
+#: includes/class-inite-agents-admin-overview.php:335
+msgid "Weekday opening"
+msgstr "Apertura entre semana"
+
+#: includes/class-inite-agents-admin-overview.php:336
+msgid "Sunday"
+msgstr "Domingo"
+
+#: includes/class-inite-agents-admin-overview.php:337
+msgid "Price"
+msgstr "Precio"
+
+#: includes/class-inite-agents-admin-overview.php:338
+msgid "Address"
+msgstr "Dirección"
+
+#: includes/class-inite-agents-admin-overview.php:339
+msgid "Phone"
+msgstr "Teléfono"
+
+#: includes/class-inite-agents-admin-overview.php:341
+#: includes/class-inite-agents-admin-overview.php:383
+#: includes/class-inite-agents-admin-overview.php:438
+msgid "Assistant"
+msgstr "Asistente"
+
+#: includes/class-inite-agents-admin-overview.php:341
+msgid "Fact"
+msgstr "Dato"
+
+#: includes/class-inite-agents-admin-overview.php:341
+msgid "Your facts"
+msgstr "Tus datos"
+
+#: includes/class-inite-agents-admin-overview.php:341
+msgid "It said"
+msgstr "Lo que dijo"
+
+#: includes/class-inite-agents-admin-overview.php:345
+msgid "something else (open the cabinet for the details)"
+msgstr "otra cosa (abre el panel para ver los detalles)"
+
+#. translators: %d: how many times each question was asked.
+#: includes/class-inite-agents-admin-overview.php:368
+#, php-format
+msgid "Each question was asked %d times."
+msgstr "Cada pregunta se hizo %d veces."
+
+#. translators: 1: answers naming the business, 2: answers.
+#: includes/class-inite-agents-admin-overview.php:372
+#, php-format
+msgid "Named in %1$s of %2$s answers."
+msgstr "Te nombra en %1$s de %2$s respuestas."
+
+#. translators: 1: answers citing the site, 2: answers.
+#: includes/class-inite-agents-admin-overview.php:376
+#, php-format
+msgid "Cited with a link to your site in %1$s of %2$s."
+msgstr "Cita con enlace a tu sitio en %1$s de %2$s."
+
+#: includes/class-inite-agents-admin-overview.php:383
+msgid "Named"
+msgstr "Te nombra"
+
+#: includes/class-inite-agents-admin-overview.php:383
+msgid "Cited"
+msgstr "Te cita"
+
+#: includes/class-inite-agents-admin-overview.php:387
+msgid "no sources"
+msgstr "sin fuentes"
+
+#: includes/class-inite-agents-admin-overview.php:399
+msgid "AI agents reading your site"
+msgstr "Agentes de IA que leen tu sitio"
+
+#. translators: %s: link to the settings.
+#: includes/class-inite-agents-admin-overview.php:401
+#, php-format
+msgid "The plugin counts agent reads while the daily report is on. %s"
+msgstr "El plugin cuenta las lecturas de agentes mientras el informe diario está activado. %s"
+
+#. translators: %s: link to the settings.
+#: includes/class-inite-agents-admin-overview.php:401
+#: includes/class-inite-agents-admin-signals.php:151
+#: includes/class-inite-agents-admin-signals.php:180
+#: includes/class-inite-agents-admin.php:43
+#: includes/class-inite-agents-admin.php:119
+msgid "Settings"
+msgstr "Ajustes"
+
+#: includes/class-inite-agents-admin-overview.php:410
+msgid "Counted on this site in the last 7 days:"
+msgstr "Contadas en este sitio en los últimos 7 días:"
+
+#: includes/class-inite-agents-admin-overview.php:411
+msgid "Agent and path"
+msgstr "Agente y ruta"
+
+#: includes/class-inite-agents-admin-overview.php:411
+#: includes/class-inite-agents-admin-overview.php:417
+msgid "Reads"
+msgstr "Lecturas"
+
+#. translators: 1: reads, 2: MCP calls.
+#: includes/class-inite-agents-admin-overview.php:414
+#, php-format
+msgid "INITE, last 30 days: %1$s reads of your agent files, %2$s calls to your MCP server."
+msgstr "INITE, últimos 30 días: %1$s lecturas de tus archivos para agentes, %2$s llamadas a tu servidor MCP."
+
+#: includes/class-inite-agents-admin-overview.php:417
+msgid "Agent"
+msgstr "Agente"
+
+#: includes/class-inite-agents-admin-overview.php:427
+msgid "People from AI assistants"
+msgstr "Personas desde asistentes de IA"
+
+#: includes/class-inite-agents-admin-overview.php:429
+msgid "Off. With the daily report on, the plugin counts visits that come from ChatGPT, Perplexity, Gemini, Copilot, Claude and other assistants: per day and page, no address and no cookie."
+msgstr "Desactivado. Con el informe diario activado, el plugin cuenta las visitas que llegan desde ChatGPT, Perplexity, Gemini, Copilot, Claude y otros asistentes: por día y página, sin dirección y sin cookie."
+
+#. translators: %s: number of visits.
+#: includes/class-inite-agents-admin-overview.php:434
+#, php-format
+msgid "%s visits in the last 30 days, counted on this site. Pages served from a full-page cache are not counted, so this is a floor."
+msgstr "%s visitas en los últimos 30 días, contadas en este sitio. Las páginas servidas desde una caché de página completa no se cuentan, así que es un mínimo."
+
+#: includes/class-inite-agents-admin-overview.php:438
+#: includes/class-inite-agents-admin-overview.php:440
+msgid "Visits"
+msgstr "Visitas"
+
+#: includes/class-inite-agents-admin-overview.php:440
+msgid "Page"
+msgstr "Página"
+
+#: includes/class-inite-agents-admin-overview.php:452
+msgid "Waiting for you"
+msgstr "Pendiente de ti"
+
+#. translators: %s: number.
+#: includes/class-inite-agents-admin-overview.php:457
+#, php-format
+msgid "%s suggestion read from your site: a value your facts do not say yet."
+msgid_plural "%s suggestions read from your site: values your facts do not say yet."
+msgstr[0] "%s sugerencia leída en tu sitio: un valor que tus datos aún no indican."
+msgstr[1] "%s sugerencias leídas en tu sitio: valores que tus datos aún no indican."
+
+#. translators: %s: number.
+#: includes/class-inite-agents-admin-overview.php:457
+msgid "Review in INITE"
+msgstr "Revisar en INITE"
+
+#. translators: %s: number.
+#: includes/class-inite-agents-admin-overview.php:459
+#, php-format
+msgid "%s article drafted and waiting for your approval."
+msgid_plural "%s articles drafted and waiting for your approval."
+msgstr[0] "%s artículo redactado que espera tu aprobación."
+msgstr[1] "%s artículos redactados que esperan tu aprobación."
+
+#. translators: %s: number.
+#: includes/class-inite-agents-admin-overview.php:459
+msgid "Read and approve in INITE"
+msgstr "Leer y aprobar en INITE"
+
+#: includes/class-inite-agents-admin-sending.php:28
+msgid "Site basics"
+msgstr "Datos básicos del sitio"
+
+#: includes/class-inite-agents-admin-sending.php:28
+msgid "Send the site title and tagline (Settings → General), the site language and address, and with WooCommerce the number of published products. INITE suggests them as your business name and description in the cabinet; nothing is published until you accept and confirm it."
+msgstr "Envía el título del sitio y la descripción corta (Ajustes → Generales), el idioma y la dirección del sitio y, con WooCommerce, el número de productos publicados. INITE te los sugiere en el panel como nombre y descripción de tu negocio; no se publica nada hasta que lo aceptes y lo confirmes."
+
+#: includes/class-inite-agents-admin-sending.php:29
+msgid "Pages and posts"
+msgstr "Páginas y entradas"
+
+#: includes/class-inite-agents-admin-sending.php:29
+msgid "Send each published page and post that has no password and is not marked noindex: its title, address, excerpt or first 300 characters, type, language and when it changed. INITE lists them in llms.txt and llms-full.txt. Up to 2,000."
+msgstr "Envía cada página y entrada publicada que no tiene contraseña ni está marcada como noindex: su título, dirección, extracto o primeros 300 caracteres, tipo, idioma y fecha de cambio. INITE las incluye en llms.txt y llms-full.txt. Hasta 2.000."
+
+#: includes/class-inite-agents-admin-sending.php:30
+msgid "Send each WooCommerce product shown in the catalogue: name, address, price, regular and sale price, currency, stock status, SKU, short description, categories and image address. Nothing is published until you turn on \"Publish my catalogue\" in the INITE cabinet; from then on agents get your products as your store holds them, through llms.txt and the MCP server. Up to 2,000."
+msgstr "Envía cada producto de WooCommerce visible en el catálogo: nombre, dirección, precio, precio normal y rebajado, moneda, estado del inventario, SKU, descripción corta, categorías y dirección de la imagen. No se publica nada hasta que actives \"Publicar mi catálogo\" en el panel de INITE; a partir de ahí, los agentes reciben tus productos tal como los tiene tu tienda, a través de llms.txt y el servidor MCP. Hasta 2.000."
+
+#: includes/class-inite-agents-admin-sending.php:31
+msgid "Events"
+msgstr "Eventos"
+
+#: includes/class-inite-agents-admin-sending.php:31
+msgid "Send each upcoming event of The Events Calendar: title, address, excerpt, start, end and venue. INITE lists them in llms.txt and llms-full.txt. Up to 200."
+msgstr "Envía cada próximo evento de The Events Calendar: título, dirección, extracto, inicio, fin y lugar. INITE los incluye en llms.txt y llms-full.txt. Hasta 200."
+
+#: includes/class-inite-agents-admin-sending.php:32
+msgid "Services from booking plugins"
+msgstr "Servicios de plugins de reservas"
+
+#: includes/class-inite-agents-admin-sending.php:32
+msgid "Send the services Bookly or Amelia show to customers: name, duration, description, price and currency. INITE shows them in the cabinet as suggestions for your services; nothing is published until you accept and confirm."
+msgstr "Envía los servicios que Bookly o Amelia muestran a los clientes: nombre, duración, descripción, precio y moneda. INITE los muestra en el panel como sugerencias para tus servicios; no se publica nada hasta que los aceptes y confirmes."
+
+#: includes/class-inite-agents-admin-sending.php:33
+msgid "Locations and hours"
+msgstr "Ubicaciones y horarios"
+
+#: includes/class-inite-agents-admin-sending.php:33
+msgid "Send the addresses, phone numbers and opening hours that WP Store Locator, Yoast Local SEO or Rank Math Local SEO keep. INITE shows them in the cabinet as suggestions; nothing is published until you accept and confirm."
+msgstr "Envía las direcciones, los teléfonos y los horarios que guardan WP Store Locator, Yoast Local SEO o Rank Math Local SEO. INITE los muestra en el panel como sugerencias; no se publica nada hasta que los aceptes y confirmes."
+
+#: includes/class-inite-agents-admin-sending.php:44
+msgid "What this site sends to INITE"
+msgstr "Qué envía este sitio a INITE"
+
+#: includes/class-inite-agents-admin-sending.php:45
+msgid "Nothing below leaves this site until you switch it on. Each is content your site already shows to anyone, and nothing about a person: no user, customer, order or visitor. Switch one off and INITE deletes what it received of that kind at the next run."
+msgstr "Nada de lo siguiente sale de este sitio hasta que lo actives. Todo es contenido que tu sitio ya muestra a cualquiera, y nada sobre personas: ningún usuario, cliente, pedido ni visitante. Si desactivas uno, INITE borra lo que recibió de ese tipo en la siguiente ejecución."
+
+#. translators: %s: plugin names.
+#: includes/class-inite-agents-admin-sending.php:87
+#: includes/class-inite-agents-admin-sending.php:95
+#, php-format
+msgid "Found: %s."
+msgstr "Encontrado: %s."
+
+#: includes/class-inite-agents-admin-sending.php:89
+msgid "Neither Bookly nor Amelia is active, so there is nothing to send."
+msgstr "Ni Bookly ni Amelia están activos, así que no hay nada que enviar."
+
+#: includes/class-inite-agents-admin-sending.php:97
+msgid "None of WP Store Locator, Yoast Local SEO or Rank Math Local SEO is active, so there is nothing to send."
+msgstr "Ninguno de WP Store Locator, Yoast Local SEO o Rank Math Local SEO está activo, así que no hay nada que enviar."
+
+#. translators: %s: date and time.
+#: includes/class-inite-agents-admin-sending.php:102
+#, php-format
+msgid "Last sent with the site basics: %s."
+msgstr "Último envío con los datos básicos del sitio: %s."
+
+#: includes/class-inite-agents-admin-sending.php:116
+msgid "WooCommerce is not active, so there is nothing to send."
+msgstr "WooCommerce no está activo, así que no hay nada que enviar."
+
+#: includes/class-inite-agents-admin-sending.php:116
+msgid "The Events Calendar is not active, so there is nothing to send."
+msgstr "The Events Calendar no está activo, así que no hay nada que enviar."
+
+#: includes/class-inite-agents-admin-sending.php:122
+msgid "Switched off: INITE is told to delete what it received, at the next run."
+msgstr "Desactivado: se pide a INITE que borre lo que recibió, en la siguiente ejecución."
+
+#. translators: %s: HTTP status or network error.
+#: includes/class-inite-agents-admin-sending.php:130
+#, php-format
+msgid "The last send failed (%s). It is tried again within the hour."
+msgstr "El último envío falló (%s). Se vuelve a intentar dentro de una hora."
+
+#. translators: 1: date and time, 2: items INITE holds, 3: the most it holds.
+#: includes/class-inite-agents-admin-sending.php:135
+#, php-format
+msgid "Last sent %1$s. INITE holds %2$s of at most %3$s."
+msgstr "Último envío: %1$s. INITE guarda %2$s de un máximo de %3$s."
+
+#: includes/class-inite-agents-admin-sending.php:141
+msgid "Not sent yet: the first send runs within a few minutes, then every hour."
+msgstr "Aún no enviado: el primer envío se hace en unos minutos y después cada hora."
+
+#: includes/class-inite-agents-admin-signals.php:63
+msgid "a refusal (403 or similar)"
+msgstr "un rechazo (403 o similar)"
+
+#: includes/class-inite-agents-admin-signals.php:64
+msgid "a captcha or a \"checking your browser\" page"
+msgstr "un captcha o una página de \"comprobando tu navegador\""
+
+#: includes/class-inite-agents-admin-signals.php:65
+msgid "an empty page"
+msgstr "una página vacía"
+
+#: includes/class-inite-agents-admin-signals.php:66
+msgid "a page whose text appears only after JavaScript runs"
+msgstr "una página cuyo texto solo aparece después de ejecutar JavaScript"
+
+#: includes/class-inite-agents-admin-signals.php:67
+msgid "no answer"
+msgstr "sin respuesta"
+
+#: includes/class-inite-agents-admin-signals.php:78
+msgid "Can AI robots open your site?"
+msgstr "¿Los robots de IA pueden abrir tu sitio?"
+
+#: includes/class-inite-agents-admin-signals.php:81
+msgid "Not checked yet. Once a week INITE opens your key pages with the names of the robots behind Bing, ChatGPT, Claude, Perplexity and Yandex, and reads what robots.txt tells each of them; the result appears here."
+msgstr "Aún no comprobado. Una vez por semana INITE abre tus páginas clave con los nombres de los robots de Bing, ChatGPT, Claude, Perplexity y Yandex, y lee lo que robots.txt le dice a cada uno; el resultado aparecerá aquí."
+
+#. translators: %s: date.
+#: includes/class-inite-agents-admin-signals.php:87
+#, php-format
+msgid "Checked %s."
+msgstr "Comprobado el %s."
+
+#: includes/class-inite-agents-admin-signals.php:90
+msgid "robots.txt has a \"Cloudflare Managed content\" block that may add rules for AI bots - check it in Cloudflare."
+msgstr "robots.txt tiene un bloque \"Cloudflare Managed content\" que puede añadir reglas para bots de IA - revísalo en Cloudflare."
+
+#: includes/class-inite-agents-admin-signals.php:94
+msgid "robots.txt did not answer, so the rules below could not be read."
+msgstr "robots.txt no respondió, así que no se pudieron leer las reglas de abajo."
+
+#: includes/class-inite-agents-admin-signals.php:97
+msgid "Search"
+msgstr "Búsqueda"
+
+#: includes/class-inite-agents-admin-signals.php:98
+msgid "Opens a page for a person"
+msgstr "Abre una página para una persona"
+
+#: includes/class-inite-agents-admin-signals.php:99
+msgid "Training"
+msgstr "Entrenamiento"
+
+#: includes/class-inite-agents-admin-signals.php:102
+msgid "allowed"
+msgstr "permitido"
+
+#: includes/class-inite-agents-admin-signals.php:103
+msgid "some paths closed"
+msgstr "algunas rutas cerradas"
+
+#: includes/class-inite-agents-admin-signals.php:104
+msgid "blocked"
+msgstr "bloqueado"
+
+#: includes/class-inite-agents-admin-signals.php:108
+msgid "Robot"
+msgstr "Robot"
+
+#: includes/class-inite-agents-admin-signals.php:108
+msgid "What it does"
+msgstr "Qué hace"
+
+#: includes/class-inite-agents-admin-signals.php:108
+msgid "Our request with its name"
+msgstr "Nuestra petición con su nombre"
+
+#: includes/class-inite-agents-admin-signals.php:115
+msgid "not opened: robots.txt only"
+msgstr "no se abrió: solo robots.txt"
+
+#: includes/class-inite-agents-admin-signals.php:115
+msgid "not opened"
+msgstr "no se abrió"
+
+#. translators: %d: pages.
+#: includes/class-inite-agents-admin-signals.php:118
+#, php-format
+msgid "got %d page"
+msgid_plural "got all %d pages"
+msgstr[0] "recibió %d página"
+msgstr[1] "recibió las %d páginas"
+
+#. translators: 1: pages that failed, 2: pages opened, 3: what came back.
+#: includes/class-inite-agents-admin-signals.php:121
+#, php-format
+msgid "%1$d of %2$d pages: %3$s"
+msgstr "%1$d de %2$d páginas: %3$s"
+
+#. translators: %s: what came back.
+#: includes/class-inite-agents-admin-signals.php:133
+#, php-format
+msgid "Probably unreadable: our request with this robot's name got %s. AI robots other than Google's do not run JavaScript, so they find no text to quote. Put the main text, prices and contacts in the HTML the server sends."
+msgstr "Probablemente ilegible. Resultado de nuestra petición con el nombre de este robot: %s. Los robots de IA que no son de Google no ejecutan JavaScript, así que no encuentran texto que citar. Pon el texto principal, los precios y los contactos en el HTML que envía el servidor."
+
+#. translators: %s: what came back.
+#: includes/class-inite-agents-admin-signals.php:136
+#, php-format
+msgid "Probably blocked: our request with this robot's name got %s. Your firewall may treat the real robot differently (it checks the robot's addresses) - confirm in Bing Webmaster Tools or your server logs."
+msgstr "Probablemente bloqueado. Resultado de nuestra petición con el nombre de este robot: %s. Tu firewall puede tratar al robot real de otra forma (comprueba las direcciones del robot) - confírmalo en Bing Webmaster Tools o en los registros del servidor."
+
+#. translators: %s: link to the Fixes tab.
+#: includes/class-inite-agents-admin-signals.php:140
+#, php-format
+msgid "Training robots are best left open: assistants also answer from what they were trained on. What robots.txt says is set on the %s tab."
+msgstr "Es mejor dejar abiertos los robots de entrenamiento: los asistentes también responden con lo que aprendieron. Lo que dice robots.txt se configura en la pestaña %s."
+
+#. translators: %s: link to the Fixes tab.
+#: includes/class-inite-agents-admin-signals.php:140
+#: includes/class-inite-agents-admin-status.php:95
+#: includes/class-inite-agents-admin.php:118
+msgid "Fixes"
+msgstr "Correcciones"
+
+#: includes/class-inite-agents-admin-signals.php:149
+msgid "How customers heard about you"
+msgstr "Cómo te conocieron los clientes"
+
+#. translators: %s: link to the settings.
+#: includes/class-inite-agents-admin-signals.php:151
+#, php-format
+msgid "Off. With the question on, customers can say where they heard about you, AI assistants among the answers: at the WooCommerce checkout, in Contact Form 7 and WPForms, or anywhere with the [inite_how_heard] shortcode. Only a count per day and answer is kept. %s"
+msgstr "Desactivado. Con la pregunta activada, los clientes pueden decir dónde te conocieron, con los asistentes de IA entre las respuestas: en la página de pago de WooCommerce, en Contact Form 7 y WPForms, o en cualquier lugar con el shortcode [inite_how_heard]. Solo se guarda un recuento por día y respuesta. %s"
+
+#: includes/class-inite-agents-admin-signals.php:157
+msgid "No answers in the last 30 days yet."
+msgstr "Aún no hay respuestas en los últimos 30 días."
+
+#. translators: 1: answers, 2: percent that named an AI assistant.
+#: includes/class-inite-agents-admin-signals.php:160
+#, php-format
+msgid "%1$s answers in the last 30 days, counted on this site. An AI assistant: %2$s%%."
+msgstr "%1$s respuestas en los últimos 30 días, contadas en este sitio. Un asistente de IA: %2$s%%."
+
+#: includes/class-inite-agents-admin-signals.php:161
+msgid "Answer"
+msgstr "Respuesta"
+
+#: includes/class-inite-agents-admin-signals.php:161
+msgid "Customers"
+msgstr "Clientes"
+
+#. translators: 1: answers, 2: percent.
+#: includes/class-inite-agents-admin-signals.php:170
+#, php-format
+msgid "INITE, from the daily reports of the last 30 days: %1$s answers, %2$s%% an AI assistant."
+msgstr "INITE, según los informes diarios de los últimos 30 días: %1$s respuestas, %2$s%% un asistente de IA."
+
+#: includes/class-inite-agents-admin-signals.php:172
+msgid "The counts reach INITE, and your monthly report, only while the daily report is on."
+msgstr "Los recuentos llegan a INITE, y a tu informe mensual, solo mientras el informe diario está activado."
+
+#: includes/class-inite-agents-admin-signals.php:178
+#: includes/class-inite-agents-admin.php:213
+msgid "IndexNow"
+msgstr "IndexNow"
+
+#. translators: %s: link to the settings.
+#: includes/class-inite-agents-admin-signals.php:180
+#, php-format
+msgid "Off. With IndexNow on, Bing, Yandex and the other engines that share it hear about a new or changed page at once. Google does not use it. %s"
+msgstr "Desactivado. Con IndexNow activado, Bing, Yandex y los demás buscadores que lo comparten se enteran al momento de una página nueva o modificada. Google no lo usa. %s"
+
+#. translators: %s: plugin name.
+#: includes/class-inite-agents-admin-signals.php:186
+#, php-format
+msgid "%s already sends IndexNow for this site, so this plugin stays quiet."
+msgstr "%s ya envía IndexNow para este sitio, así que este plugin no envía nada."
+
+#: includes/class-inite-agents-admin-signals.php:192
+msgid "On. Nothing sent yet: the next page you publish or change is announced a minute later."
+msgstr "Activado. Aún no se ha enviado nada: la próxima página que publiques o modifiques se anunciará un minuto después."
+
+#. translators: 1: date and time, 2: addresses, 3: HTTP status or error.
+#: includes/class-inite-agents-admin-signals.php:197
+#, php-format
+msgid "Last sent %1$s: %2$s addresses, answer %3$s."
+msgstr "Último envío %1$s: %2$s direcciones, respuesta %3$s."
+
+#. translators: 1: date and time, 2: addresses, 3: HTTP status or error.
+#: includes/class-inite-agents-admin-signals.php:197
+msgid "Not accepted: the addresses wait for the next try."
+msgstr "No aceptado: las direcciones esperan al próximo intento."
+
+#. translators: 1: sent today, 2: daily cap, 3: waiting.
+#: includes/class-inite-agents-admin-signals.php:201
+#, php-format
+msgid "Today: %1$s of %2$s addresses. Waiting: %3$s."
+msgstr "Hoy: %1$s de %2$s direcciones. En espera: %3$s."
+
+#: includes/class-inite-agents-admin-status.php:47
+msgid "WordPress is installed in a subdirectory, so it never sees requests to the domain root. Upload the files to the root instead, or ask INITE for the agents subdomain."
+msgstr "WordPress está instalado en un subdirectorio, así que nunca ve las peticiones a la raíz del dominio. Sube los archivos a la raíz o pide a INITE el subdominio de agentes."
+
+#. translators: 1: path, 2: who serves it.
+#: includes/class-inite-agents-admin-status.php:56
+#, php-format
+msgid "%1$s is left alone: %2$s already answers it."
+msgstr "%1$s no se toca: %2$s ya lo sirve."
+
+#. translators: %s: path.
+#: includes/class-inite-agents-admin-status.php:59
+#, php-format
+msgid "%s: nothing stored yet."
+msgstr "%s: aún no hay nada guardado."
+
+#. translators: %s: path linked to the live file.
+#: includes/class-inite-agents-admin-status.php:62
+#, php-format
+msgid "%s is served."
+msgstr "%s se está sirviendo."
+
+#: includes/class-inite-agents-admin-status.php:76
+msgid "No Content-Signal line stored yet."
+msgstr "Aún no hay ninguna línea Content-Signal guardada."
+
+#: includes/class-inite-agents-admin-status.php:79
+msgid "A robots.txt file exists on the server, so WordPress does not generate one and this plugin cannot add to it. Paste this line under \"User-agent: *\" in that file:"
+msgstr "Hay un archivo robots.txt en el servidor, así que WordPress no genera uno y este plugin no puede añadirle nada. Pega esta línea debajo de \"User-agent: *\" en ese archivo:"
+
+#. translators: %s: the robots.txt line.
+#: includes/class-inite-agents-admin-status.php:85
+#, php-format
+msgid "Adds %s to the \"User-agent: *\" group."
+msgstr "Añade %s al grupo \"User-agent: *\"."
+
+#. translators: %s: link to the Fixes tab.
+#: includes/class-inite-agents-admin-status.php:95
+#, php-format
+msgid "The JSON-LD of your facts is switched in %s, type by type."
+msgstr "El JSON-LD de tus datos se activa en %s, tipo por tipo."
+
+#: includes/class-inite-agents-admin-status.php:105
+msgid "Needs WordPress 6.9 or later, which has the Abilities API."
+msgstr "Necesita WordPress 6.9 o posterior, que incluye la Abilities API."
+
+#: includes/class-inite-agents-admin-status.php:108
+msgid "Install and activate the MCP Adapter plugin so agents can reach them over MCP."
+msgstr "Instala y activa el plugin MCP Adapter para que los agentes puedan llegar a ellas por MCP."
+
+#. translators: %s: MCP endpoint URL.
+#: includes/class-inite-agents-admin-status.php:111
+#, php-format
+msgid "The MCP Adapter lists them on its default server: %s"
+msgstr "El MCP Adapter las muestra en su servidor predeterminado: %s"
+
+#: includes/class-inite-agents-admin-status.php:121
+msgid "Off: nothing is sent, and neither agent reads nor visits from assistants are counted."
+msgstr "Desactivado: no se envía nada, y no se cuentan ni las lecturas de agentes ni las visitas desde asistentes."
+
+#. translators: %d: number of reads.
+#: includes/class-inite-agents-admin-status.php:128
+#, php-format
+msgid "AI agents read the served paths %d time in the last 7 days."
+msgid_plural "AI agents read the served paths %d times in the last 7 days."
+msgstr[0] "Los agentes de IA leyeron las rutas servidas %d vez en los últimos 7 días."
+msgstr[1] "Los agentes de IA leyeron las rutas servidas %d veces en los últimos 7 días."
+
+#: includes/class-inite-agents-admin-status.php:138
+msgid "Off: no post is made. The articles you approve wait in your INITE cabinet."
+msgstr "Desactivado: no se crea ninguna entrada. Los artículos que apruebes esperan en tu panel de INITE."
+
+#: includes/class-inite-agents-admin-status.php:140
+msgid "The articles you approve in the INITE cabinet become posts at the next hourly sync, as \"New articles\" below says."
+msgstr "Los artículos que apruebes en el panel de INITE se convierten en entradas en la próxima sincronización horaria, según lo que indique \"Artículos nuevos\" más abajo."
+
+#. translators: %s: plugin name.
+#: includes/class-inite-agents-admin-status.php:152
+#, php-format
+msgid "%s already sends IndexNow for this site, so this one stays quiet even when switched on."
+msgstr "%s ya envía IndexNow para este sitio, así que este no envía nada aunque esté activado."
+
+#: includes/class-inite-agents-admin-status.php:155
+msgid "Off: search engines find changes at their next crawl."
+msgstr "Desactivado: los buscadores encuentran los cambios en su próximo rastreo."
+
+#. translators: %s: key file address.
+#: includes/class-inite-agents-admin-status.php:159
+#, php-format
+msgid "The key is served at %s, as the engines check it. Addresses go a minute after a change, at most 100 a request and 500 a day."
+msgstr "La clave se sirve en %s, donde la comprueban los buscadores. Las direcciones se envían un minuto después de un cambio, como máximo 100 por petición y 500 al día."
+
+#: includes/class-inite-agents-admin-status.php:169
+msgid "Off: the question is not shown anywhere."
+msgstr "Desactivado: la pregunta no se muestra en ningún sitio."
+
+#: includes/class-inite-agents-admin-status.php:171
+msgid "Shown at the WooCommerce checkout when WooCommerce is active. In Contact Form 7, add the [inite_how_heard] tag to a form; in WPForms, give a dropdown the CSS class inite-how-heard and the answers as its choices; anywhere else, use the [inite_how_heard] shortcode."
+msgstr "Se muestra en la página de pago de WooCommerce cuando WooCommerce está activo. En Contact Form 7, añade la etiqueta [inite_how_heard] a un formulario; en WPForms, da a un desplegable la clase CSS inite-how-heard y las respuestas como opciones; en cualquier otro lugar, usa el shortcode [inite_how_heard]."
+
+#: includes/class-inite-agents-admin-status.php:173
+msgid "The counts stay on this site until the daily report is on."
+msgstr "Los recuentos se quedan en este sitio hasta que actives el informe diario."
+
+#: includes/class-inite-agents-admin-status.php:188
+msgid "Last check"
+msgstr "Última comprobación"
+
+#: includes/class-inite-agents-admin-status.php:188
+msgid "OK"
+msgstr "OK"
+
+#: includes/class-inite-agents-admin-status.php:193
+msgid "Site"
+msgstr "Sitio"
+
+#: includes/class-inite-agents-admin-status.php:194
+msgid "Facts version"
+msgstr "Versión de los datos"
+
+#: includes/class-inite-agents-admin-status.php:194
+msgid "confirmed"
+msgstr "confirmada"
+
+#: includes/class-inite-agents-admin-status.php:195
+msgid "Last sync"
+msgstr "Última sincronización"
+
+#: includes/class-inite-agents-admin-status.php:196
+msgid "Files"
+msgstr "Archivos"
+
+#: includes/class-inite-agents-admin-status.php:200
+msgid "MCP server"
+msgstr "Servidor MCP"
+
+#: includes/class-inite-agents-admin-status.php:203
+msgid "Stored copy"
+msgstr "Copia guardada"
+
+#: includes/class-inite-agents-admin-status.php:203
+msgid "none: nothing is served"
+msgstr "ninguna: no se sirve nada"
+
+#: includes/class-inite-agents-admin-status.php:219
+msgid "never"
+msgstr "nunca"
+
+#: includes/class-inite-agents-admin.php:123
+msgid "INITE Agents sections"
+msgstr "Secciones de INITE Agents"
+
+#: includes/class-inite-agents-admin.php:147
+msgid "Connected. The files below are the copy now stored."
+msgstr "Conectado. Los archivos de abajo son la copia guardada ahora."
+
+#: includes/class-inite-agents-admin.php:151
+msgid "Serves the facts your business confirmed in INITE to AI agents, from a copy stored on this site. Make the site key in the \"For agents\" tab of your INITE cabinet."
+msgstr "Sirve a los agentes de IA los datos que tu negocio confirmó en INITE, desde una copia guardada en este sitio. Crea la clave del sitio en la pestaña \"Para agentes\" de tu panel de INITE."
+
+#: includes/class-inite-agents-admin.php:151
+msgid "Open the INITE cabinet"
+msgstr "Abrir el panel de INITE"
+
+#: includes/class-inite-agents-admin.php:155
+msgid "Site key"
+msgstr "Clave del sitio"
+
+#: includes/class-inite-agents-admin.php:161
+msgid "A key is saved. Leave the field empty to keep it."
+msgstr "Hay una clave guardada. Deja el campo vacío para conservarla."
+
+#: includes/class-inite-agents-admin.php:161
+msgid "Paste the key the cabinet showed you once."
+msgstr "Pega la clave que el panel te mostró una sola vez."
+
+#: includes/class-inite-agents-admin.php:163
+msgid "Remove the key and stop serving"
+msgstr "Quitar la clave y dejar de servir"
+
+#: includes/class-inite-agents-admin.php:179
+msgid "New articles"
+msgstr "Artículos nuevos"
+
+#: includes/class-inite-agents-admin.php:182
+msgid "Save as drafts: I press Publish in WordPress"
+msgstr "Guardar como borradores: yo pulso Publicar en WordPress"
+
+#: includes/class-inite-agents-admin.php:184
+msgid "Publish at once"
+msgstr "Publicar al momento"
+
+#: includes/class-inite-agents-admin.php:191
+msgid "Connection"
+msgstr "Conexión"
+
+#: includes/class-inite-agents-admin.php:196
+msgid "Test connection"
+msgstr "Probar la conexión"
+
+#: includes/class-inite-agents-admin.php:207
+msgid "Root files"
+msgstr "Archivos en la raíz"
+
+#: includes/class-inite-agents-admin.php:207
+msgid "Serve /llms.txt, /llms-full.txt, /.well-known/agent-card.json, /.well-known/mcp.json and /.well-known/api-catalog"
+msgstr "Servir /llms.txt, /llms-full.txt, /.well-known/agent-card.json, /.well-known/mcp.json y /.well-known/api-catalog"
+
+#: includes/class-inite-agents-admin.php:208
+msgid "Add the Content-Signal line to robots.txt"
+msgstr "Añadir la línea Content-Signal a robots.txt"
+
+#: includes/class-inite-agents-admin.php:209
+msgid "Page head"
+msgstr "Head de la página"
+
+#: includes/class-inite-agents-admin.php:209
+msgid "Add the WebMCP script and the links to the files"
+msgstr "Añadir el script WebMCP y los enlaces a los archivos"
+
+#: includes/class-inite-agents-admin.php:210
+msgid "Abilities for the MCP Adapter"
+msgstr "Habilidades para el MCP Adapter"
+
+#: includes/class-inite-agents-admin.php:210
+msgid "Register five read-only abilities agents can call through the WordPress MCP Adapter"
+msgstr "Registrar cinco habilidades de solo lectura que los agentes pueden usar a través del MCP Adapter de WordPress"
+
+#: includes/class-inite-agents-admin.php:211
+msgid "Daily report"
+msgstr "Informe diario"
+
+#: includes/class-inite-agents-admin.php:211
+msgid "Count AI agent reads and visits from AI assistants, and send INITE the counts with the plugin version and the paths served (counts only: no address, no cookie)"
+msgstr "Contar las lecturas de agentes de IA y las visitas desde asistentes de IA, y enviar a INITE los recuentos con la versión del plugin y las rutas servidas (solo recuentos: sin dirección, sin cookie)"
+
+#: includes/class-inite-agents-admin.php:212
+msgid "Articles"
+msgstr "Artículos"
+
+#: includes/class-inite-agents-admin.php:212
+msgid "Create posts from the articles you approved in the INITE cabinet, and tell INITE their addresses"
+msgstr "Crear entradas a partir de los artículos que aprobaste en el panel de INITE e informar a INITE de sus direcciones"
+
+#: includes/class-inite-agents-admin.php:213
+msgid "Tell Bing, Yandex and the other engines that share IndexNow when a public page, post or product is published, changed or removed (Google does not use it)"
+msgstr "Avisar a Bing, Yandex y los demás buscadores que comparten IndexNow cuando se publica, modifica o elimina una página, entrada o producto público (Google no lo usa)"
+
+#: includes/class-inite-agents-admin.php:214
+msgid "How did you hear about us"
+msgstr "Cómo nos conociste"
+
+#: includes/class-inite-agents-admin.php:214
+msgid "Ask customers an optional question with AI assistants among the answers, at the WooCommerce checkout, in Contact Form 7 and WPForms, or with the [inite_how_heard] shortcode; only a count per day and answer is kept and sent with the daily report"
+msgstr "Hacer a los clientes una pregunta opcional, con los asistentes de IA entre las respuestas, en la página de pago de WooCommerce, en Contact Form 7 y WPForms, o con el shortcode [inite_how_heard]; solo se guarda un recuento por día y respuesta, que se envía con el informe diario"
+
+#: includes/class-inite-agents-conflicts.php:38
+msgid "a file on the server"
+msgstr "un archivo en el servidor"
+
+#: includes/class-inite-agents-requests.php:48
+#: includes/class-inite-agents-requests.php:149
+msgid "Requests from agents"
+msgstr "Solicitudes de agentes"
+
+#: includes/class-inite-agents-requests.php:49
+msgid "Agent requests"
+msgstr "Solicitudes de agentes"
+
+#: includes/class-inite-agents-requests.php:86
+msgid "No site key is saved."
+msgstr "No hay ninguna clave del sitio guardada."
+
+#: includes/class-inite-agents-requests.php:92
+msgid "INITE did not answer. Try again in a moment."
+msgstr "INITE no respondió. Inténtalo de nuevo en un momento."
+
+#: includes/class-inite-agents-requests.php:150
+msgid "AI agents sent these requests to your business for the people they help, with their agreement. Reply to each person yourself: nothing was confirmed or booked for you."
+msgstr "Agentes de IA enviaron estas solicitudes a tu negocio en nombre de las personas a las que ayudan, con su consentimiento. Responde tú a cada persona: no se confirmó ni se reservó nada por ti."
+
+#: includes/class-inite-agents-requests.php:152
+msgid "Saved."
+msgstr "Guardado."
+
+#: includes/class-inite-agents-requests.php:154
+msgid "That did not go through. Try again."
+msgstr "No se pudo completar. Inténtalo de nuevo."
+
+#: includes/class-inite-agents-requests.php:162
+msgid "All"
+msgstr "Todas"
+
+#: includes/class-inite-agents-requests.php:163
+msgid "New"
+msgstr "Nuevas"
+
+#: includes/class-inite-agents-requests.php:164
+msgid "Answered"
+msgstr "Respondidas"
+
+#: includes/class-inite-agents-requests.php:165
+msgid "Spam"
+msgstr "Spam"
+
+#: includes/class-inite-agents-requests.php:177
+msgid "Received"
+msgstr "Recibida"
+
+#: includes/class-inite-agents-requests.php:177
+msgid "Person"
+msgstr "Persona"
+
+#: includes/class-inite-agents-requests.php:177
+#: includes/class-inite-agents-requests.php:200
+msgid "Request"
+msgstr "Solicitud"
+
+#: includes/class-inite-agents-requests.php:177
+msgid "Status"
+msgstr "Estado"
+
+#: includes/class-inite-agents-requests.php:182
+msgid "No requests yet."
+msgstr "Aún no hay solicitudes."
+
+#: includes/class-inite-agents-requests.php:200
+msgid "Booking request"
+msgstr "Solicitud de reserva"
+
+#: includes/class-inite-agents-requests.php:203
+msgid "Service:"
+msgstr "Servicio:"
+
+#: includes/class-inite-agents-requests.php:207
+msgid "When:"
+msgstr "Cuándo:"
+
+#: includes/class-inite-agents-requests.php:211
+msgid "People:"
+msgstr "Personas:"
+
+#. translators: %s: the agent's product name
+#: includes/class-inite-agents-requests.php:217
+#, php-format
+msgid "Sent by %s"
+msgstr "Enviada por %s"
+
+#: includes/class-inite-agents-requests.php:230
+msgid "Mark answered"
+msgstr "Marcar como respondida"
+
+#: includes/class-inite-agents-requests.php:231
+msgid "Mark spam"
+msgstr "Marcar como spam"
+
+#: includes/class-inite-agents-requests.php:232
+msgid "Mark new"
+msgstr "Marcar como nueva"
+
+#: includes/class-inite-agents-requests.php:250
+msgid "INITE keeps each request for 180 days, then deletes it. Choose where requests go in the \"For agents\" tab of your INITE cabinet."
+msgstr "INITE guarda cada solicitud durante 180 días y después la borra. Elige adónde llegan las solicitudes en la pestaña \"Para agentes\" de tu panel de INITE."
+
+#: includes/class-inite-agents-settings.php:164
+msgid "That does not look like a site key. It starts with isk_ and is 36 characters long."
+msgstr "Eso no parece una clave del sitio. Empieza por isk_ y tiene 36 caracteres."
+
+#. translators: %s: HTTP status code or network error.
+#: includes/class-inite-agents-summary.php:90
+#, php-format
+msgid "INITE did not answer (%s)."
+msgstr "INITE no respondió (%s)."
+
+#: includes/class-inite-agents-survey.php:78
+msgid "Google search"
+msgstr "Búsqueda de Google"
+
+#: includes/class-inite-agents-survey.php:79
+msgid "Yandex search"
+msgstr "Búsqueda de Yandex"
+
+#: includes/class-inite-agents-survey.php:80
+msgid "ChatGPT"
+msgstr "ChatGPT"
+
+#: includes/class-inite-agents-survey.php:81
+msgid "Perplexity"
+msgstr "Perplexity"
+
+#: includes/class-inite-agents-survey.php:82
+msgid "Gemini"
+msgstr "Gemini"
+
+#: includes/class-inite-agents-survey.php:83
+msgid "Claude"
+msgstr "Claude"
+
+#: includes/class-inite-agents-survey.php:84
+msgid "Grok"
+msgstr "Grok"
+
+#: includes/class-inite-agents-survey.php:85
+msgid "Alice (Yandex)"
+msgstr "Alice (Yandex)"
+
+#: includes/class-inite-agents-survey.php:86
+msgid "GigaChat"
+msgstr "GigaChat"
+
+#: includes/class-inite-agents-survey.php:87
+msgid "Another AI assistant"
+msgstr "Otro asistente de IA"
+
+#: includes/class-inite-agents-survey.php:88
+msgid "Social media"
+msgstr "Redes sociales"
+
+#: includes/class-inite-agents-survey.php:89
+msgid "Friends or colleagues"
+msgstr "Amigos o colegas"
+
+#: includes/class-inite-agents-survey.php:90
+msgid "Other"
+msgstr "Otro"
+
+#: includes/class-inite-agents-survey.php:100
+msgid "How did you hear about us?"
+msgstr "¿Cómo nos conociste?"
+
+#: includes/class-inite-agents-survey.php:222
+msgid "(optional)"
+msgstr "(opcional)"
+
+#: includes/class-inite-agents-survey.php:222
+msgid "Choose an answer"
+msgstr "Elige una respuesta"
+
+#: includes/class-inite-agents-survey.php:236
+msgid "Thank you!"
+msgstr "¡Gracias!"
+
+#: includes/class-inite-agents-survey.php:239
+msgid "Send"
+msgstr "Enviar"
+
+#: includes/class-inite-agents-sync.php:44
+msgid "No site key is saved yet."
+msgstr "Aún no hay ninguna clave del sitio guardada."
+
+#: includes/class-inite-agents-sync.php:56
+msgid "The service refused this site key."
+msgstr "El servicio rechazó esta clave del sitio."
+
+#. translators: %s: HTTP status code or network error.
+#: includes/class-inite-agents-sync.php:62
+#, php-format
+msgid "The INITE service did not answer (%s). The last good copy is still served."
+msgstr "El servicio de INITE no respondió (%s). Se sigue sirviendo la última copia buena."
+
+#: includes/class-inite-agents-sync.php:66
+msgid "The manifest did not read. The last good copy is still served."
+msgstr "No se pudo leer el manifiesto. Se sigue sirviendo la última copia buena."
+
+#. translators: %s: file name.
+#: includes/class-inite-agents-sync.php:84
+#, php-format
+msgid "The file %s did not arrive. The last good copy is still served."
+msgstr "El archivo %s no llegó. Se sigue sirviendo la última copia buena."
+
+#: includes/class-inite-agents-sync.php:96
+msgid "The public facts did not arrive. The last good copy is still served."
+msgstr "Los datos públicos no llegaron. Se sigue sirviendo la última copia buena."

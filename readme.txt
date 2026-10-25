@@ -4,7 +4,7 @@ Tags: ai, llms.txt, mcp, agents, schema
 Requires at least: 6.0
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 0.10.0
+Stable tag: 0.10.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -166,6 +166,9 @@ INITE privacy policy: https://inite.ai/en/privacy
 
 == Changelog ==
 
+= 0.10.1 =
+* Translations: the plugin speaks Russian (ru_RU), Brazilian Portuguese (pt_BR) and Spanish (es_ES) - every screen, notice and the "How did you hear about us?" question. WordPress 6.7 and later finds them by itself; on older versions the plugin loads them.
+
 = 0.10.0 =
 * Overview: "Can AI robots open your site?" - what INITE saw when it opened your key pages with the names of Bing's, ChatGPT's, Claude's, Perplexity's and Yandex's robots, and what robots.txt tells each of them, with a warning for a Cloudflare managed robots.txt. A refusal is marked "probably blocked", with where to confirm it.
 * IndexNow: switch it on to tell Bing, Yandex and the other engines that share it about a published, changed or removed page at once. The plugin serves its key at `/{key}.txt`, batches addresses and stands down when another plugin already sends IndexNow.
@@ -207,6 +210,9 @@ INITE privacy policy: https://inite.ai/en/privacy
 * First release: root files, robots.txt Content-Signal, head tags, abilities for the MCP Adapter, daily report.
 
 == Upgrade Notice ==
+
+= 0.10.1 =
+Adds Russian, Brazilian Portuguese and Spanish translations.
 
 = 0.10.0 =
 Shows which AI robots get your pages, and adds IndexNow and a "How did you hear about us?" question, both off until you switch them on. The robots.txt policy no longer blocks anything by default; a choice you saved is kept.

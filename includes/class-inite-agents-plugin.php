@@ -27,6 +27,7 @@ final class Inite_Agents_Plugin {
 		Inite_Agents_Indexnow::register();
 		Inite_Agents_Survey::register();
 
+		add_action( 'init', array( __CLASS__, 'translations' ) );
 		add_action( Inite_Agents_Sync::CRON, array( __CLASS__, 'cron_sync' ) );
 		add_action( Inite_Agents_Ping::CRON, array( 'Inite_Agents_Ping', 'run' ) );
 		add_action( 'update_option_' . Inite_Agents_Settings::OPTION, array( __CLASS__, 'saved' ), 10, 0 );
@@ -41,6 +42,18 @@ final class Inite_Agents_Plugin {
 		// Hooked everywhere: WordPress checks for updates from cron as well as from the admin.
 		if ( class_exists( 'Inite_Agents_Updater' ) ) {
 			Inite_Agents_Updater::register();
+		}
+	}
+
+	/**
+	 * The translations in languages/ on WordPress before 6.7. From 6.7 on
+	 * WordPress finds them itself through the Domain Path header, and a
+	 * translation from WordPress.org in wp-content/languages comes first
+	 * either way.
+	 */
+	public static function translations() {
+		if ( version_compare( get_bloginfo( 'version' ), '6.7', '<' ) ) {
+			load_plugin_textdomain( 'inite-agents', false, dirname( plugin_basename( INITE_AGENTS_FILE ) ) . '/languages' );
 		}
 	}
 
